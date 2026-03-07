@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Eagle and The Blackbird — Film · Music · Brand</title>
+  <meta name="description" content="Full-service multimedia production. Film. Music. Brand. South Florida — Available for Travel." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #000000;
+      --white:   #FFFFFF;
+      --gray-d:  #A9A9A9;
+      --gray-l:  #D3D3D3;
+      --brown:   #7B3F00;
+      --khaki:   #C3B091;
+      --beige:   #F5F5DC;
+      --wine:    #722F37;
+      --orange:  #BF5700;
+      --mustard: #FFDB58;
+      --olive:   #808000;
+      --navy:    #000080;
+      --lilac:   #C8A2C8;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
+    body::after {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none; z-index: 900; opacity: .026;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 300px 300px;
+    }
+
+    /* ─ Cursor ─────────────────────────────── */
+    #cur {
+      position: fixed; width: 8px; height: 8px;
+      background: var(--orange); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%); mix-blend-mode: screen;
+    }
+    #cur-ring {
+      position: fixed; width: 28px; height: 28px;
+      border: 1px solid rgba(191,87,0,.4); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: transform .13s ease;
+    }
+
+    /* ─ Nav ─────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 400;
+      padding: 24px 52px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    nav::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.92) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; font-weight: 400; letter-spacing: .06em;
+      color: var(--white); text-decoration: none;
+      opacity: 0; animation: aFade 1s ease 2.4s forwards;
+    }
+    .nav-logo .ast { display: none; }
+    .nav-links {
+      display: flex; gap: 40px; list-style: none;
+      opacity: 0; animation: aFade 1s ease 2.4s forwards;
+    }
+    .nav-links a {
+      font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gray-d); text-decoration: none; transition: color .3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 1px; background: var(--orange); transition: width .35s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ─ Hero ─────────────────────────────────── */
+    #hero {
+      height: 100vh; position: relative; overflow: hidden;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+      padding-bottom: 18vh;
+    }
+    #hero-canvas { position: absolute; inset: 0; }
+    #hero::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 50% 65% at 22% 50%, rgba(123,63,0,.2) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 65% at 78% 50%, rgba(114,47,55,.14) 0%, transparent 65%);
+    }
+    .hero-inner { position: relative; z-index: 1; width: 100%; }
+    .hero-eyebrow {
+      display: flex; align-items: center; justify-content: center; gap: 18px;
+      font-size: 9px; letter-spacing: .44em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 52px;
+      opacity: 0; animation: aFadeUp 1s ease .2s forwards;
+    }
+    .hero-eyebrow-dot { width: 3px; height: 3px; background: var(--orange); border-radius: 50%; }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(42px, 6.5vw, 92px);
+      font-weight: 400; line-height: 1; letter-spacing: -.01em; color: var(--white);
+      display: flex; align-items: center; width: 100%;
+    }
+    .ht-side {
+      flex: 1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: .18em;
+    }
+    .ht-row { overflow: hidden; padding-bottom: .12em; }
+    .ht-inner { display: block; transform: translateY(110%); opacity: 0; }
+    .ht-the {
+      font-family: 'DM Sans', sans-serif; font-weight: 400;
+      font-size: .24em; letter-spacing: .35em; text-transform: uppercase;
+      color: var(--khaki);
+    }
+    .ht-the-1 .ht-inner { animation: aSlide 1s cubic-bezier(.16,1,.3,1) .28s forwards; }
+    .ht-name-1 .ht-inner { animation: aSlide 1.1s cubic-bezier(.16,1,.3,1) .44s forwards; }
+    .ht-the-2 .ht-inner { animation: aSlide 1s cubic-bezier(.16,1,.3,1) .38s forwards; }
+    .ht-name-2 .ht-inner { animation: aSlide 1.1s cubic-bezier(.16,1,.3,1) .54s forwards; }
+    .hero-vline {
+      width: 1px; align-self: stretch; flex-shrink: 0;
+      background: linear-gradient(to bottom, transparent, var(--orange) 25%, var(--orange) 75%, transparent);
+      opacity: 0; animation: aFade 1.2s ease .5s forwards;
+    }
+    .hero-rule {
+      width: 1px; height: 0;
+      background: linear-gradient(to bottom, var(--orange), transparent);
+      margin: 44px auto; animation: aGrow 1.1s ease 1.7s forwards;
+    }
+    .hero-sub {
+      font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: clamp(14px, 1.6vw, 20px); font-weight: 400;
+      color: var(--khaki); letter-spacing: .05em;
+      margin-top: 44px;
+      opacity: 0; animation: aFade 1s ease 1.9s forwards;
+    }
+    .hero-pillars {
+      display: flex; align-items: stretch; justify-content: center;
+      margin-top: 48px; border: 1px solid rgba(191,87,0,.18);
+      opacity: 0; animation: aFade 1s ease 2.1s forwards;
+    }
+    .hp {
+      padding: 12px 28px;
+      font-size: 9px; letter-spacing: .3em; text-transform: uppercase;
+      border-right: 1px solid rgba(191,87,0,.18);
+    }
+    .hp:last-child { border-right: none; }
+    .hp.film  { color: var(--khaki); }
+    .hp.music { color: var(--khaki); }
+    .hp.cloth { color: var(--mustard); }
+    .hero-scroll {
+      position: absolute; bottom: 38px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      opacity: 0; animation: aFade 1s ease 2.7s forwards; z-index: 1;
+    }
+    .hero-scroll span { font-size: 8px; letter-spacing: .35em; text-transform: uppercase; color: var(--gray-d); }
+    .hero-scroll-line {
+      width: 1px; height: 42px;
+      background: linear-gradient(to bottom, var(--orange), transparent);
+      animation: aPulse 2.4s ease 3s infinite;
+    }
+
+    /* ─ Shared layout ───────────────────────── */
+    .wrap { max-width: 1360px; margin: 0 auto; padding: 0 52px; }
+    .sl {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 9px; letter-spacing: .42em; text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .sl::before { content: ''; display: block; width: 20px; height: 1px; }
+    .sl.od  { color: var(--orange); } .sl.od::before  { background: var(--orange); }
+    .sl.ol  { color: var(--brown);  } .sl.ol::before  { background: var(--brown); }
+    .sl.wn  { color: var(--wine);   } .sl.wn::before  { background: var(--wine); }
+    .sl.ms  { color: var(--mustard);} .sl.ms::before  { background: var(--mustard); }
+    .sh {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(34px, 4.5vw, 64px); font-weight: 400; line-height: 1.04;
+    }
+
+    /* ─ About ────────────────────────────────── */
+    #about { background: var(--beige); padding: 150px 0; border-top: none; }
+    #about .sl.od { color: var(--olive); }
+    #about .sl.od::before { background: var(--olive); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    #about .sh { color: var(--olive); margin-bottom: 28px; }
+    #about .sh em { font-style: italic; color: var(--orange); }
+    #about .rv > p { font-size: 14.5px; line-height: 1.95; color: var(--olive); max-width: 420px; }
+    #about .rv > p+p { margin-top: 16px; }
+    .about-pillars { display: flex; flex-direction: column; gap: 2px; }
+    .ap {
+      padding: 26px 28px; border: 1px solid rgba(0,0,0,.08);
+      display: flex; align-items: flex-start; gap: 18px;
+      transition: background .3s;
+    }
+    .ap:hover { background: rgba(0,0,0,.03); }
+    .ap-bar { width: 3px; height: 36px; flex-shrink: 0; margin-top: 4px; }
+    .ap-bar.f { background: var(--navy); }
+    .ap-bar.m { background: var(--wine); }
+    .ap-bar.c { background: var(--mustard); }
+    .ap h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; font-weight: 400; color: var(--black); margin-bottom: 5px;
+    }
+    .ap p { font-size: 12.5px; line-height: 1.7; color: rgba(0,0,0,.55); }
+
+    /* ─ Film ──────────────────────────────────── */
+    #film { background: var(--navy); padding: 150px 0; }
+    #film .sh { color: var(--white); }
+    #film .sl.ol { color: var(--khaki); }
+    #film .sl.ol::before { background: var(--khaki); }
+    #book .sl.ol { color: var(--lilac); }
+    #book .sl.ol::before { background: var(--lilac); }
+    .film-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-top: 60px; }
+    .film-about p { font-size: 14.5px; line-height: 1.95; color: rgba(255,255,255,.72); max-width: 400px; margin-bottom: 32px; }
+    #film .pn { color: var(--white); }
+    #film .pn small { color: rgba(255,255,255,.45); }
+    #film .pi { border-bottom-color: rgba(255,255,255,.1); }
+    #film .pi:first-child { border-top-color: rgba(255,255,255,.1); }
+    #film .pp.br { color: var(--khaki); }
+    #film p[style] { color: rgba(255,255,255,.3) !important; }
+    .plist { list-style: none; }
+    .pi {
+      display: flex; align-items: baseline; justify-content: space-between;
+      padding: 17px 0; border-bottom: 1px solid rgba(0,0,0,.08);
+    }
+    .pi:first-child { border-top: 1px solid rgba(0,0,0,.08); }
+    .pn { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 400; color: var(--black); }
+    .pn small { display: block; font-family: 'DM Sans', sans-serif; font-size: 11px; color: rgba(0,0,0,.42); font-weight: 300; margin-top: 2px; }
+    .pp { font-size: 15px; font-weight: 500; white-space: nowrap; }
+    .pp.br { color: var(--brown); }
+    .pp.wn { color: var(--wine); }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      margin-top: 36px; padding: 14px 32px;
+      font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+      text-decoration: none; transition: gap .3s;
+    }
+    .cta-btn::after { content: '→'; }
+    .cta-fill { background: var(--brown); color: var(--white); }
+    .cta-fill:hover { background: var(--black); gap: 20px; }
+    .cta-out-wine { border: 1px solid var(--wine); color: var(--wine); }
+    .cta-out-wine:hover { background: var(--wine); color: var(--white); gap: 20px; }
+    .cta-out-or { border: 1px solid var(--orange); color: var(--orange); }
+    .cta-out-or:hover { background: var(--orange); color: var(--white); gap: 20px; }
+
+    /* ─ Music ─────────────────────────────────── */
+    #music { background: var(--wine); padding: 150px 0; border-top: none; }
+    #music .sl.wn { color: var(--mustard); }
+    #music .sl.wn::before { background: var(--mustard); }
+    #music .pp.wn { color: var(--mustard); }
+    #music .cta-out-wine { border-color: rgba(255,255,255,.4); color: var(--white); }
+    #music .cta-out-wine:hover { background: var(--white); color: var(--wine); }
+    #music p { color: rgba(255,255,255,.75); }
+    .music-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-top: 60px; }
+    .music-about p { font-size: 14.5px; line-height: 1.95; color: var(--gray-d); max-width: 400px; margin-bottom: 32px; }
+    .plist-d .pi { border-bottom-color: rgba(255,255,255,.07); }
+    .plist-d .pi:first-child { border-top-color: rgba(255,255,255,.07); }
+    .plist-d .pn { color: var(--white); }
+    .plist-d .pn small { color: rgba(255,255,255,.38); }
+
+    /* ─ Bundles ───────────────────────────────── */
+    #bundles { background: var(--brown); padding: 80px 0; }
+    .bundles-row { display: flex; align-items: flex-start; gap: 0; }
+    .bundle-head {
+      flex: 0 0 260px; padding-right: 56px;
+      border-right: 1px solid rgba(255,255,255,.18);
+    }
+    .bundle-head h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px; font-weight: 400; color: var(--white);
+      line-height: 1.25; margin-bottom: 10px;
+    }
+    .bundle-head p { font-size: 12px; color: rgba(255,255,255,.55); line-height: 1.65; }
+    .bundles-cards {
+      flex: 1; display: flex; gap: 0; list-style: none; padding-left: 56px;
+    }
+    .bc {
+      flex: 1; padding: 0 28px;
+      border-right: 1px solid rgba(255,255,255,.15);
+    }
+    .bc:last-child { border-right: none; }
+    .bc-name { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 400; color: var(--white); margin-bottom: 8px; }
+    .bc-desc { font-size: 12px; color: rgba(255,255,255,.5); line-height: 1.6; margin-bottom: 12px; }
+    .bc-price { font-size: 22px; font-weight: 500; color: var(--mustard); }
+
+    /* ─ Brand ──────────────────────────────── */
+    #clothing { background: var(--beige); padding: 150px 0; }
+    .cloth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .cloth-text .sh { color: var(--black); margin-bottom: 24px; }
+    .cloth-text p { font-size: 14.5px; line-height: 1.95; color: rgba(0,0,0,.58); max-width: 400px; }
+    .cloth-text p+p { margin-top: 16px; }
+    .cloth-soon {
+      display: inline-block; margin-top: 36px; padding: 12px 28px;
+      border: 1px solid var(--mustard); background: var(--mustard);
+      font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--black);
+    }
+    .seal-wrap { display: flex; align-items: center; justify-content: center; }
+    .seal-outer { animation: aSpin 40s linear infinite; transform-origin: center; }
+    .seal-center-g { animation: aSpin 40s linear reverse infinite; transform-origin: 150px 150px; }
+
+    /* ─ Products ──────────────────────────────── */
+    #products { background: var(--black); padding: 150px 0; border-top: 1px solid rgba(255,255,255,.05); }
+    #products .sh { color: var(--white); margin-bottom: 18px; }
+    .products-intro {
+      font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: 18px; color: var(--gray-d); margin-bottom: 64px; max-width: 520px;
+    }
+    .prod-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+    .prod-card {
+      background: #080604; border: 1px solid rgba(255,255,255,.05);
+      padding: 34px 28px 28px; transition: border-color .3s, background .3s;
+    }
+    .prod-card:hover { border-color: rgba(191,87,0,.28); background: rgba(191,87,0,.03); }
+    .prod-tag {
+      display: inline-block; font-size: 8.5px; letter-spacing: .28em; text-transform: uppercase;
+      padding: 3px 8px; margin-bottom: 20px;
+    }
+    .prod-tag.avail { color: var(--orange); border: 1px solid rgba(191,87,0,.25); }
+    .prod-tag.soon  { color: var(--gray-d); border: 1px solid rgba(169,169,169,.18); }
+    .prod-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 21px; font-weight: 400; color: var(--white);
+      margin-bottom: 12px; line-height: 1.25;
+    }
+    .prod-desc { font-size: 12.5px; line-height: 1.75; color: var(--gray-d); margin-bottom: 24px; }
+    .prod-price { font-size: 21px; font-weight: 400; color: var(--orange); margin-bottom: 20px; }
+    .prod-price.tbd {
+      font-size: 13px; font-weight: 300; font-style: italic;
+      font-family: 'Playfair Display', serif; color: var(--gray-d);
+    }
+    .prod-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase;
+      text-decoration: none; border-bottom: 1px solid; padding-bottom: 3px;
+      transition: gap .3s;
+    }
+    .prod-btn::after { content: '→'; }
+    .prod-btn.active { color: var(--orange); border-color: rgba(191,87,0,.3); }
+    .prod-btn.active:hover { gap: 16px; border-color: var(--orange); }
+    .prod-btn.inactive { color: var(--gray-d); border-color: rgba(169,169,169,.2); pointer-events: none; }
+
+    /* ─ Philosophy ────────────────────────────── */
+    #philosophy, #blackbird-quote {
+      background: var(--black); padding: 120px 0;
+      border-top: 1px solid rgba(255,255,255,.05);
+      text-align: center; position: relative; overflow: hidden;
+    }
+    #philosophy::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 100% at 50% 50%, rgba(123,63,0,.14) 0%, transparent 70%);
+    }
+    #blackbird-quote::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 100% at 50% 50%, rgba(114,47,55,.2) 0%, transparent 70%);
+    }
+    .phil-q {
+      font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: clamp(20px, 3vw, 38px); font-weight: 400; line-height: 1.55;
+      color: var(--white); max-width: 780px; margin: 0 auto 22px;
+      position: relative; z-index: 1;
+    }
+    .phil-q em { color: var(--orange); font-style: normal; }
+    .phil-src {
+      font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--gray-d); position: relative; z-index: 1;
+    }
+
+    /* ─ Marquee ───────────────────────────────── */
+    #marquee { background: var(--khaki); padding: 46px 0; border-top: none; overflow: hidden; }
+    .mq-track {
+      display: flex; gap: 52px; white-space: nowrap;
+      animation: aMarquee 32s linear infinite; width: max-content;
+    }
+    .mq-item {
+      display: flex; align-items: center; gap: 18px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 2.5vw, 34px); font-weight: 400;
+      color: rgba(0,0,0,.45); letter-spacing: .02em;
+    }
+    #marquee .mq-item img { filter: none; }
+    .mq-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
+
+    /* ─ Booking ───────────────────────────────── */
+    #book { background: var(--beige); padding: 150px 0; border-top: 1px solid rgba(0,0,0,.07); }
+    .book-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+    .book-left .sh { color: var(--black); margin-bottom: 22px; }
+    .book-left > p { font-size: 14.5px; line-height: 1.9; color: rgba(0,0,0,.55); margin-bottom: 14px; }
+    .binfo { display: flex; gap: 14px; align-items: flex-start; margin-top: 22px; }
+    .binfo-dot { width: 5px; height: 5px; background: var(--orange); border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
+    .binfo-txt { font-size: 13px; line-height: 1.7; color: rgba(0,0,0,.5); }
+    .binfo-txt strong { font-weight: 500; color: var(--black); display: block; margin-bottom: 2px; }
+    #book .binfo-dot { background: var(--lilac); }
+    #book .binfo-txt strong { color: var(--lilac); }
+
+    /* Form */
+    .bform { display: flex; flex-direction: column; gap: 2px; }
+    .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .ff { display: flex; flex-direction: column; }
+    .ff label {
+      font-size: 9px; letter-spacing: .28em; text-transform: uppercase;
+      color: rgba(0,0,0,.45); padding: 12px 18px 4px;
+      background: rgba(0,0,0,.04);
+    }
+    .ff input, .ff select, .ff textarea {
+      padding: 10px 18px 14px;
+      background: rgba(0,0,0,.04); border: none;
+      border-top: 1px solid transparent;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px; font-weight: 300; color: var(--black);
+      outline: none; transition: background .3s, border-color .3s;
+      -webkit-appearance: none; appearance: none;
+    }
+    .ff input:focus, .ff select:focus, .ff textarea:focus {
+      background: rgba(0,0,0,.07); border-top-color: var(--orange);
+    }
+    .ff textarea { resize: vertical; min-height: 110px; }
+    .ff select { cursor: pointer; }
+    .f-submit {
+      padding: 18px 40px; background: var(--lilac); color: var(--white);
+      border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px; letter-spacing: .28em; text-transform: uppercase; font-weight: 400;
+      transition: background .3s; margin-top: 2px;
+    }
+    .f-submit:hover { background: var(--wine); }
+    .f-note { font-size: 11px; color: rgba(0,0,0,.38); line-height: 1.6; padding-top: 12px; text-align: center; }
+
+    /* ─ Contact ───────────────────────────────── */
+    #contact {
+      background: var(--black); padding: 120px 0 80px;
+      border-top: 1px solid rgba(255,255,255,.05); text-align: center;
+    }
+    #contact .sh { color: var(--white); margin-bottom: 26px; }
+    .ct-sub {
+      font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: 18px; color: var(--gray-d); margin-bottom: 44px;
+    }
+    .ct-email {
+      font-size: 12px; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--orange); text-decoration: none;
+      border-bottom: 1px solid rgba(191,87,0,.3); padding-bottom: 5px;
+      transition: letter-spacing .4s, border-color .3s;
+    }
+    .ct-email:hover { letter-spacing: .38em; border-color: var(--orange); }
+    .ct-loc { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gray-d); margin-top: 18px; }
+    .ct-soc {
+      display: flex; align-items: center; justify-content: center; gap: 28px;
+      margin-top: 50px;
+    }
+    .ct-soc a {
+      font-size: 9.5px; letter-spacing: .24em; text-transform: uppercase;
+      color: var(--gray-d); text-decoration: none; transition: color .3s;
+    }
+    .ct-soc a:hover { color: var(--white); }
+    .ct-soc span { width: 1px; height: 10px; background: rgba(255,255,255,.07); }
+
+    footer {
+      background: var(--brown);
+      border-top: none;
+      padding: 26px 52px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    footer p { font-size: 10px; letter-spacing: .1em; color: var(--khaki); }
+
+    /* ─ Reveal ────────────────────────────────── */
+    .rv { opacity: 0; transform: translateY(28px); transition: opacity .9s ease, transform .9s cubic-bezier(.16,1,.3,1); }
+    .rv.show { opacity: 1; transform: none; }
+
+    /* ─ Keyframes ─────────────────────────────── */
+    @keyframes aFade    { to { opacity: 1; } }
+    @keyframes aFadeUp  { from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none} }
+    @keyframes aSlide   { to { transform:translateY(0);opacity:1; } }
+    @keyframes aGrow    { to { height: 44px; } }
+    @keyframes aPulse   { 0%,100%{opacity:.3}50%{opacity:1} }
+    @keyframes aMarquee { from{transform:translateX(0)}to{transform:translateX(-50%)} }
+    @keyframes aSpin    { from{transform:rotate(0deg)}to{transform:rotate(360deg)} }
+    @keyframes aSpinRev { from{transform:rotate(0deg)}to{transform:rotate(-360deg)} }
+
+    /* ─ Responsive ────────────────────────────── */
+    @media (max-width: 960px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      .wrap { padding: 0 24px; }
+      .about-grid, .film-grid, .music-grid,
+      .cloth-grid, .book-grid { grid-template-columns: 1fr; gap: 48px; }
+      .bundles-row { flex-direction: column; gap: 32px; }
+      .bundle-head { flex: none; width: 100%; padding-right: 0; border-right: none; border-bottom: 1px solid rgba(255,255,255,.15); padding-bottom: 28px; }
+      .bundles-cards { padding-left: 0; flex-direction: column; gap: 22px; }
+      .bc { border-right: none; padding: 0 0 20px; border-bottom: 1px solid rgba(255,255,255,.1); }
+      .prod-grid { grid-template-columns: 1fr 1fr; }
+      .frow { grid-template-columns: 1fr; }
+      footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+    }
+    @media (max-width: 560px) {
+      .prod-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- ── Nav ──────────────────────────────────── -->
+<nav>
+  <a href="#" class="nav-logo"><img src="logo.png" alt="EB" style="height:20px;display:block;filter:invert(1);"></a>
+  <ul class="nav-links">
+    <li><a href="#about">Studio</a></li>
+    <li><a href="#film">Film</a></li>
+    <li><a href="#music">Music</a></li>
+    <li><a href="#clothing">Brand</a></li>
+    <li><a href="#products">Shop</a></li>
+    <li><a href="#book">Book</a></li>
+  </ul>
+</nav>
+
+<!-- ── Hero ─────────────────────────────────── -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-inner">
+    <h1 class="hero-title">
+      <div class="ht-side">
+        <span class="ht-row ht-the-1"><span class="ht-inner ht-the">The</span></span>
+        <span class="ht-row ht-name-1"><span class="ht-inner">Eagle</span></span>
+      </div>
+      <div class="hero-vline"></div>
+      <div class="ht-side">
+        <span class="ht-row ht-the-2"><span class="ht-inner ht-the">The</span></span>
+        <span class="ht-row ht-name-2"><span class="ht-inner">Blackbird</span></span>
+      </div>
+    </h1>
+
+    <p class="hero-sub">Vision that soars. Stories that sing.</p>
+    <div class="hero-pillars">
+      <span class="hp film">Film Production</span>
+      <span class="hp cloth"><img src="logo.png" alt="EB" style="height:9px;vertical-align:middle;display:block;margin:0 auto;filter:invert(1);"></span>
+      <span class="hp music">Music Production</span>
+    </div>
+    <p style="font-family:'DM Sans',sans-serif;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gray-d);margin-top:14px;opacity:0;animation:aFade 1s ease 2.3s forwards;">South Florida &nbsp;·&nbsp; Est. 2024</p>
+  </div>
+</section>
+
+<!-- ── About ─────────────────────────────────── -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="rv">
+        <p class="sl od">The Studio</p>
+        <h2 class="sh" style="color:var(--olive);margin-bottom:28px">
+          Two forces.<br>
+          One <em style="font-style:italic;color:var(--black)">singular</em><br>
+          vision.
+        </h2>
+        <p>The Eagle and The Blackbird is a Christian and Black-owned multimedia creative studio based in South Florida. We bring the eagle's precision and the blackbird's soul to every project we touch.</p>
+        <p>One point of contact. Film, music, and fashion — built for creators, churches, businesses, and artists who refuse the ordinary.</p>
+      </div>
+      <div class="about-pillars rv" style="transition-delay:.18s">
+        <div class="ap">
+          <div class="ap-bar f"></div>
+          <div>
+            <h3>The Eagle — Film</h3>
+            <p>Videography, photography, and livestream production. The eagle sees what others cannot — sharp, precise, high above.</p>
+          </div>
+        </div>
+        <div class="ap">
+          <div class="ap-bar m"></div>
+          <div>
+            <h3>The Blackbird — Music</h3>
+            <p>Music production, live performance, and audio mixing. The blackbird sings because it must — soulful, grounded, true.</p>
+          </div>
+        </div>
+        <div class="ap">
+          <div class="ap-bar c"></div>
+          <div>
+            <h3><img src="logo.png" alt="EB" style="height:1em;vertical-align:middle;margin-right:6px;filter:invert(1);"> — Brand</h3>
+            <p>Where the eagle and blackbird meet: a clothing brand that wears the spirit of both. Coming soon.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Film ───────────────────────────────────── -->
+<section id="film">
+  <div class="wrap">
+    <div class="rv">
+      <p class="sl ol">Eagle Production</p>
+      <h2 class="sh" style="color:var(--black)">Film &amp; Photo</h2>
+    </div>
+    <div class="film-grid">
+      <div class="film-about rv" style="transition-delay:.1s">
+        <p>The eagle sees what others cannot. With precision, patience, and a sweeping perspective, we bring your vision to life — events, documentaries, promos, and everything in between.</p>
+        <p>South Florida based. Available for travel.</p>
+        <a href="#book" class="cta-btn cta-fill">Book a Film Project</a>
+      </div>
+      <div class="rv" style="transition-delay:.2s">
+        <h3 style="font-family:'Playfair Display',serif;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--brown);margin-bottom:4px;font-weight:400">Videography</h3>
+        <ul class="plist">
+          <li class="pi">
+            <div class="pn">Event Highlight Video<small>Up to 4 hrs · 2–3 min edited video with music</small></div>
+            <span class="pp br">$500</span>
+          </li>
+          <li class="pi">
+            <div class="pn">Full Event Coverage<small>Full day (8 hrs) · 5–8 min edited video</small></div>
+            <span class="pp br">$900</span>
+          </li>
+          <li class="pi">
+            <div class="pn">Promotional Video<small>1–3 min · Social media or marketing</small></div>
+            <span class="pp br">$400</span>
+          </li>
+          <li class="pi">
+            <div class="pn">Livestream Production<small>Multi-camera · Audio mixing · Up to 3 hrs</small></div>
+            <span class="pp br">$600</span>
+          </li>
+          <li class="pi">
+            <div class="pn">Livestream + Live Music<small>Full production with live performance · Up to 3 hrs</small></div>
+            <span class="pp br">$800</span>
+          </li>
+        </ul>
+        <h3 style="font-family:'Playfair Display',serif;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--brown);margin:28px 0 4px;font-weight:400">Photography</h3>
+        <ul class="plist">
+          <li class="pi">
+            <div class="pn">Portrait Session<small>1 hr · 20 edited images · One location</small></div>
+            <span class="pp br">$200</span>
+          </li>
+          <li class="pi">
+            <div class="pn">Extended Portrait Session<small>2 hrs · 40 edited images · Up to two locations</small></div>
+            <span class="pp br">$350</span>
+          </li>
+          <li class="pi">
+            <div class="pn">Event Coverage — Half Day<small>Up to 4 hrs · 75+ edited images</small></div>
+            <span class="pp br">$400</span>
+          </li>
+          <li class="pi">
+            <div class="pn">Event Coverage — Full Day<small>Up to 8 hrs · 150+ edited images</small></div>
+            <span class="pp br">$700</span>
+          </li>
+          <li class="pi">
+            <div class="pn">Conference / Corporate<small>Full day · Headshots and event photos</small></div>
+            <span class="pp br">$900</span>
+          </li>
+        </ul>
+        <p style="font-size:11.5px;color:rgba(0,0,0,.4);margin-top:16px;line-height:1.6">Add-ons: Raw files +$100 · Rush delivery +50% · Travel beyond 30mi $0.50/mi · Commercial licensing — contact us</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Philosophy ─────────────────────────────── -->
+<section id="philosophy">
+  <div class="wrap">
+    <div class="rv">
+      <p class="phil-q">"But they that wait upon the Lord shall renew their strength; they shall mount up with wings as <em>eagles</em>; they shall run, and not be weary; and they shall walk, and not faint."</p>
+      <p class="phil-src">Isaiah 40:31 KJV</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Music ──────────────────────────────────── -->
+<section id="music">
+  <div class="wrap">
+    <div class="rv">
+      <p class="sl wn">Blackbird Production</p>
+      <h2 class="sh" style="color:var(--white)">Music &amp; Audio</h2>
+    </div>
+    <div class="music-grid">
+      <div class="music-about rv" style="transition-delay:.1s">
+        <p>The blackbird sings because it must. We produce music that carries weight — beats, compositions, live performance, and audio work that sounds like truth.</p>
+        <p>Original. Soulful. Built to outlast the moment.</p>
+        <a href="#book" class="cta-btn cta-out-wine">Book a Music Project</a>
+      </div>
+      <div class="rv" style="transition-delay:.2s">
+        <ul class="plist plist-d">
+          <li class="pi">
+            <div class="pn">Custom Background Music<small>Original track for your video project · Up to 3 min</small></div>
+            <span class="pp wn">$150</span>
+          </li>
+          <li class="pi">
+            <div class="pn">Live Music Performance<small>Solo performance for events, worship, private gatherings · Up to 2 hrs</small></div>
+            <span class="pp wn">$300</span>
+          </li>
+          <li class="pi">
+            <div class="pn">Audio Mixing / Mastering<small>Professional mix for recordings or podcasts</small></div>
+            <span class="pp wn">$100</span>
+          </li>
+          <li class="pi">
+            <div class="pn">Full Production Package<small>Custom music · Sound design · Mixing for video</small></div>
+            <span class="pp wn">$250</span>
+          </li>
+        </ul>
+        <p style="font-size:11.5px;color:rgba(255,255,255,.3);margin-top:16px;line-height:1.6">Custom packages available upon request · 50% deposit secures your date · Turnaround 1–7 days</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Blackbird Quote ────────────────────────── -->
+<section id="blackbird-quote">
+  <div class="wrap">
+    <div class="rv">
+      <p class="phil-q">"<em>Blackbird</em> singing in the dead of night.<br>Take these broken wings and learn to fly.<br>All your life.<br>You were only waiting for this moment to arise."</p>
+      <p class="phil-src">Blackbird — The Beatles</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Bundles ─────────────────────────────────── -->
+<section id="bundles">
+  <div class="wrap">
+    <div class="bundles-row rv">
+      <div class="bundle-head">
+        <h2>Better<br>Together</h2>
+        <p>Combine services for a complete multimedia experience at a bundled rate.</p>
+      </div>
+      <ul class="bundles-cards">
+        <li class="bc">
+          <p class="bc-name">Artist Promo</p>
+          <p class="bc-desc">Portrait session + promo video + custom music</p>
+          <span class="bc-price">$900</span>
+        </li>
+        <li class="bc">
+          <p class="bc-name">Event Complete</p>
+          <p class="bc-desc">Full day photo + video with highlight reel</p>
+          <span class="bc-price">$1,400</span>
+        </li>
+        <li class="bc">
+          <p class="bc-name">Church / Worship</p>
+          <p class="bc-desc">Livestream + photography + audio mixing</p>
+          <span class="bc-price">$450</span>
+        </li>
+        <li class="bc">
+          <p class="bc-name">Church + Live Music</p>
+          <p class="bc-desc">Full production with live musical performance</p>
+          <span class="bc-price">$650</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── Brand ────────────────────────────────── -->
+<section id="clothing">
+  <div class="wrap">
+    <div class="cloth-grid">
+      <div class="cloth-text rv">
+        <p class="sl ms"><img src="logo.png" alt="EB" style="height:9px;vertical-align:middle;"></p>
+        <h2 class="sh">The<br><em style="font-style:italic;color:var(--mustard)">Brand</em></h2>
+        <p>When the eagle and the blackbird come together, they become something else entirely. EB is the clothing expression of this studio — wearable art rooted in vision, soul, and Black creative excellence.</p>
+        <p>Each piece carries the mark of both birds. The seal. The story. The standard.</p>
+        <span class="cloth-soon">Coming Soon</span>
+      </div>
+      <div class="seal-wrap rv" style="transition-delay:.2s">
+        <img src="seal.png" alt="The Eagle and The Blackbird seal" style="width:340px;max-width:100%;animation:aSpin 40s linear infinite;">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── Digital Products ────────────────────────── -->
+<section id="products">
+  <div class="wrap">
+    <div class="rv">
+      <p class="sl od">Digital Products</p>
+      <h2 class="sh">Shop</h2>
+      <p class="products-intro">Tools and resources built from real creative work — for creators, producers, and freelancers ready to level up.</p>
+    </div>
+    <div class="prod-grid rv" style="transition-delay:.1s">
+      <div class="prod-card">
+        <span class="prod-tag avail">Available</span>
+        <h3 class="prod-name">Client Management Template</h3>
+        <p class="prod-desc">Notion system for managing clients, projects, contracts, invoices, and scheduling. Built for multimedia freelancers.</p>
+        <p class="prod-price">$19</p>
+        <a href="#" class="prod-btn active">Get Template</a>
+      </div>
+      <div class="prod-card">
+        <span class="prod-tag avail">Available</span>
+        <h3 class="prod-name">Creative Production Hub</h3>
+        <p class="prod-desc">Notion template for tracking film and music projects from concept to delivery. Shot lists, music cues, assets library.</p>
+        <p class="prod-price">$19</p>
+        <a href="#" class="prod-btn active">Get Template</a>
+      </div>
+      <div class="prod-card">
+        <span class="prod-tag soon">Coming Soon</span>
+        <h3 class="prod-name">Cinematic LUT Pack</h3>
+        <p class="prod-desc">8–12 versatile LUTs for Final Cut Pro — warm church, moody event, clean corporate, and more. Built from real client work.</p>
+        <p class="prod-price tbd">In Development</p>
+        <span class="prod-btn inactive">Notify Me</span>
+      </div>
+      <div class="prod-card">
+        <span class="prod-tag soon">Coming Soon</span>
+        <h3 class="prod-name">Logic Pro Preset Pack</h3>
+        <p class="prod-desc">10–15 channel strips and mixing presets for vocals, instruments, podcasts, and worship audio.</p>
+        <p class="prod-price tbd">In Development</p>
+        <span class="prod-btn inactive">Notify Me</span>
+      </div>
+    </div>
+    <div style="margin-top:48px;padding-top:48px;border-top:1px solid rgba(255,255,255,.06)" class="rv" style="transition-delay:.2s">
+      <p class="sl od" style="margin-bottom:12px">On the Horizon</p>
+      <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:18px;color:var(--gray-d);max-width:560px">
+        Software as a Service — tools built from the E&thinsp;B workflow, eventually available to the broader creative community.
+        <em style="color:rgba(191,87,0,.6);font-style:normal"> More soon.</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Booking ─────────────────────────────────── -->
+<section id="book">
+  <div class="wrap">
+    <div class="book-grid">
+      <div class="rv">
+        <p class="sl ol">Book a Project</p>
+        <h2 class="sh" style="color:var(--black)">Let's Work<br>Together</h2>
+        <p style="color:var(--lilac)">Fill out the form and we'll be in touch within 48 hours. Custom packages available — if you don't see exactly what you need, ask.</p>
+        <div class="binfo">
+          <div class="binfo-dot"></div>
+          <div class="binfo-txt">
+            <strong>Deposit &amp; Payment</strong>
+            50% deposit required to secure your date. Remaining balance due on delivery.
+          </div>
+        </div>
+        <div class="binfo">
+          <div class="binfo-dot"></div>
+          <div class="binfo-txt">
+            <strong>Turnaround</strong>
+            Standard delivery 1–7 days. Rush delivery available (+50%).
+          </div>
+        </div>
+        <div class="binfo">
+          <div class="binfo-dot"></div>
+          <div class="binfo-txt">
+            <strong>Location</strong>
+            South Florida based. Available for travel — travel fee applies beyond 30 miles.
+          </div>
+        </div>
+      </div>
+      <form class="bform rv" style="transition-delay:.18s" onsubmit="handleSubmit(event)">
+        <div class="frow">
+          <div class="ff">
+            <label for="f-name">Full Name</label>
+            <input type="text" id="f-name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="ff">
+            <label for="f-email">Email</label>
+            <input type="email" id="f-email" name="email" placeholder="your@email.com" required />
+          </div>
+        </div>
+        <div class="frow">
+          <div class="ff">
+            <label for="f-phone">Phone (optional)</label>
+            <input type="tel" id="f-phone" name="phone" placeholder="(000) 000-0000" />
+          </div>
+          <div class="ff">
+            <label for="f-service">Service</label>
+            <select id="f-service" name="service" required>
+              <option value="" disabled selected>Select a service</option>
+              <optgroup label="Film Production">
+                <option>Event Highlight Video — $500</option>
+                <option>Full Event Coverage — $900</option>
+                <option>Promotional Video — $400</option>
+                <option>Livestream Production — $600</option>
+                <option>Livestream + Live Music — $800</option>
+                <option>Portrait Session — $200</option>
+                <option>Extended Portrait Session — $350</option>
+                <option>Event Photography — Half Day — $400</option>
+                <option>Event Photography — Full Day — $700</option>
+                <option>Conference / Corporate — $900</option>
+              </optgroup>
+              <optgroup label="Music Production">
+                <option>Custom Background Music — $150</option>
+                <option>Live Music Performance — $300</option>
+                <option>Audio Mixing / Mastering — $100</option>
+                <option>Full Production Package — $250</option>
+              </optgroup>
+              <optgroup label="Bundles">
+                <option>Artist Promo Package — $900</option>
+                <option>Event Complete — $1,400</option>
+                <option>Church / Worship — $450</option>
+                <option>Church + Live Music — $650</option>
+              </optgroup>
+              <option>Custom Package — Contact for pricing</option>
+            </select>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="ff">
+            <label for="f-date">Preferred Date</label>
+            <input type="date" id="f-date" name="date" />
+          </div>
+          <div class="ff">
+            <label for="f-budget">Budget Range</label>
+            <select id="f-budget" name="budget">
+              <option value="" disabled selected>Select range</option>
+              <option>Under $250</option>
+              <option>$250 – $500</option>
+              <option>$500 – $1,000</option>
+              <option>$1,000 – $2,000</option>
+              <option>$2,000+</option>
+              <option>Flexible / Not sure yet</option>
+            </select>
+          </div>
+        </div>
+        <div class="ff">
+          <label for="f-details">Project Details</label>
+          <textarea id="f-details" name="details" placeholder="Tell us about your project — event type, vision, timeline, any questions..." required></textarea>
+        </div>
+        <button type="submit" class="f-submit">Send Inquiry →</button>
+        <p class="f-note">We'll respond within 48 hours. Custom packages always available.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── Contact ─────────────────────────────────── -->
+<section id="contact">
+  <div class="wrap">
+    <div class="rv">
+      <h2 class="sh" style="font-size:clamp(42px,6.5vw,88px);line-height:.95;margin-bottom:24px">
+        Start a<br>Conversation
+      </h2>
+      <p class="ct-sub">Every great project begins with a single exchange.</p>
+      <a href="mailto:studio@eagleandblackbird.com" class="ct-email">studio@eagleandblackbird.com</a>
+      <p class="ct-loc">South Florida &nbsp;·&nbsp; Available for Travel</p>
+      <div class="ct-soc">
+        <a href="#">Instagram</a>
+        <span></span>
+        <a href="#">YouTube</a>
+        <span></span>
+        <a href="#">SoundCloud</a>
+        <span></span>
+        <a href="#">Behance</a>
+        <span></span>
+        <a href="#">Pixieset</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 The Eagle and The Blackbird</p>
+  <p>Film · Music · Brand &nbsp;|&nbsp; South Florida</p>
+</footer>
+
+<!-- ── Scripts ─────────────────────────────────── -->
+<script>
+  /* Cursor */
+  const cur = document.getElementById('cur');
+  const ring = document.getElementById('cur-ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => {
+    mx=e.clientX; my=e.clientY;
+    cur.style.left=mx+'px'; cur.style.top=my+'px';
+  });
+  (function tick(){
+    rx+=(mx-rx)*.1; ry+=(my-ry)*.1;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(tick);
+  })();
+
+  /* Hero canvas — warm embers */
+  const c = document.getElementById('hero-canvas');
+  const ctx = c.getContext('2d');
+  function rs(){ c.width=innerWidth; c.height=innerHeight; }
+  rs(); addEventListener('resize', rs);
+
+  const pts = Array.from({length:70}, () => ({
+    x: Math.random()*innerWidth,
+    y: Math.random()*innerHeight,
+    r: Math.random()*1.5+.2,
+    vx: (Math.random()-.5)*.22,
+    vy: -(Math.random()*.2+.05),
+    a: Math.random()*.28+.07,
+    warm: Math.random()>.45
+  }));
+
+  (function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    const g = ctx.createRadialGradient(c.width/2, c.height*.52, 0, c.width/2, c.height*.52, c.width*.68);
+    g.addColorStop(0,'rgba(48,22,4,.5)');
+    g.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=g; ctx.fillRect(0,0,c.width,c.height);
+    pts.forEach(p => {
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle = p.warm
+        ? `rgba(191,87,0,${p.a})`
+        : `rgba(195,176,145,${p.a*.5})`;
+      ctx.fill();
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.y<-8){ p.y=c.height+8; p.x=Math.random()*c.width; }
+      if(p.x<-8) p.x=c.width+8;
+      if(p.x>c.width+8) p.x=-8;
+    });
+    requestAnimationFrame(draw);
+  })();
+
+
+  /* Scroll reveal */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); });
+  }, {threshold:.07, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  /* Smooth scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+    });
+  });
+
+  /* Form submit */
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.f-submit');
+    btn.textContent = 'Inquiry Sent ✓';
+    btn.style.background = '#9b7aaa';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Send Inquiry →';
+      btn.style.background = '';
+      btn.disabled = false;
+      e.target.reset();
+    }, 4000);
+  }
+</script>
+
+</body>
+</html>
