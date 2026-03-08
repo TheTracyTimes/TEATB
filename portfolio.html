@@ -117,17 +117,15 @@
     .video .port-card-inner::before  { background: var(--navy); }
     .music .port-card-inner::before  { background: var(--wine); }
 
-    /* Ghost letter watermark */
+    /* Ghost logo watermark */
     .port-ghost {
       position: absolute; top: 50%; left: 50%;
       transform: translate(-50%, -58%);
-      font-family: 'Playfair Display', serif;
-      font-size: 100px; font-weight: 400; letter-spacing: -.04em;
-      color: var(--white); opacity: .04; user-select: none;
-      transition: opacity .35s;
-      line-height: 1;
+      width: 58%; height: auto;
+      filter: invert(1); opacity: .05; user-select: none;
+      pointer-events: none; transition: opacity .35s;
     }
-    .port-card:hover .port-ghost { opacity: .07; }
+    .port-card:hover .port-ghost { opacity: .09; }
 
     /* Label */
     .port-card-name {
@@ -194,7 +192,7 @@
 
       <div class="port-card photo">
         <div class="port-card-inner">
-          <span class="port-ghost">E</span>
+          <img class="port-ghost" src="logo.png" alt="" />
           <p class="port-card-name">Portrait Session</p>
           <p class="port-card-meta">1 hr · 20 images <span></span> $100</p>
         </div>
@@ -202,7 +200,7 @@
 
       <div class="port-card photo">
         <div class="port-card-inner">
-          <span class="port-ghost">E</span>
+          <img class="port-ghost" src="logo.png" alt="" />
           <p class="port-card-name">Extended Portrait Session</p>
           <p class="port-card-meta">2 hrs · 40 images <span></span> $200</p>
         </div>
@@ -210,7 +208,7 @@
 
       <div class="port-card photo">
         <div class="port-card-inner">
-          <span class="port-ghost">E</span>
+          <img class="port-ghost" src="logo.png" alt="" />
           <p class="port-card-name">Event Coverage — Half Day</p>
           <p class="port-card-meta">Up to 4 hrs · 75+ images <span></span> $400</p>
         </div>
@@ -218,7 +216,7 @@
 
       <div class="port-card photo">
         <div class="port-card-inner">
-          <span class="port-ghost">E</span>
+          <img class="port-ghost" src="logo.png" alt="" />
           <p class="port-card-name">Event Coverage — Full Day</p>
           <p class="port-card-meta">Up to 8 hrs · 150+ images <span></span> $800</p>
         </div>
@@ -239,7 +237,7 @@
 
       <div class="port-card video">
         <div class="port-card-inner">
-          <span class="port-ghost">E</span>
+          <img class="port-ghost" src="logo.png" alt="" />
           <p class="port-card-name">Promotional Video</p>
           <p class="port-card-meta">1–3 min <span></span> $300</p>
         </div>
@@ -247,7 +245,7 @@
 
       <div class="port-card video">
         <div class="port-card-inner">
-          <span class="port-ghost">E</span>
+          <img class="port-ghost" src="logo.png" alt="" />
           <p class="port-card-name">Event Highlight Video</p>
           <p class="port-card-meta">Up to 4 hrs · 2–3 min edit <span></span> $400</p>
         </div>
@@ -255,7 +253,7 @@
 
       <div class="port-card video">
         <div class="port-card-inner">
-          <span class="port-ghost">E</span>
+          <img class="port-ghost" src="logo.png" alt="" />
           <p class="port-card-name">Livestream Production</p>
           <p class="port-card-meta">Multi-camera · Up to 3 hrs <span></span> $600</p>
         </div>
@@ -263,7 +261,7 @@
 
       <div class="port-card video">
         <div class="port-card-inner">
-          <span class="port-ghost">E</span>
+          <img class="port-ghost" src="logo.png" alt="" />
           <p class="port-card-name">Full Event Coverage</p>
           <p class="port-card-meta">Full day · 5–8 min edit <span></span> $800</p>
         </div>
@@ -284,7 +282,7 @@
 
       <div class="port-card music">
         <div class="port-card-inner">
-          <span class="port-ghost">B</span>
+          <img class="port-ghost" src="logo.png" alt="" />
           <p class="port-card-name">Audio Mixing / Mastering</p>
           <p class="port-card-meta">Recordings &amp; podcasts <span></span> $100</p>
         </div>
@@ -292,7 +290,7 @@
 
       <div class="port-card music">
         <div class="port-card-inner">
-          <span class="port-ghost">B</span>
+          <img class="port-ghost" src="logo.png" alt="" />
           <p class="port-card-name">Custom Background Music</p>
           <p class="port-card-meta">Up to 3 min <span></span> $150</p>
         </div>
@@ -300,7 +298,7 @@
 
       <div class="port-card music">
         <div class="port-card-inner">
-          <span class="port-ghost">B</span>
+          <img class="port-ghost" src="logo.png" alt="" />
           <p class="port-card-name">Musician</p>
           <p class="port-card-meta">Session · Live · Studio <span></span> $175</p>
         </div>
@@ -308,7 +306,7 @@
 
       <div class="port-card music">
         <div class="port-card-inner">
-          <span class="port-ghost">B</span>
+          <img class="port-ghost" src="logo.png" alt="" />
           <p class="port-card-name">Live Music Performance</p>
           <p class="port-card-meta">Up to 2 hrs <span></span> $200</p>
         </div>
@@ -316,7 +314,7 @@
 
       <div class="port-card music">
         <div class="port-card-inner">
-          <span class="port-ghost">B</span>
+          <img class="port-ghost" src="logo.png" alt="" />
           <p class="port-card-name">Song Arrangements</p>
           <p class="port-card-meta">New instrumentation &amp; style <span></span> $200</p>
         </div>
@@ -324,7 +322,7 @@
 
       <div class="port-card music">
         <div class="port-card-inner">
-          <span class="port-ghost">B</span>
+          <img class="port-ghost" src="logo.png" alt="" />
           <p class="port-card-name">Full Production Package</p>
           <p class="port-card-meta">Music · Sound design · Mix <span></span> $250</p>
         </div>
@@ -332,7 +330,7 @@
 
       <div class="port-card music">
         <div class="port-card-inner">
-          <span class="port-ghost">B</span>
+          <img class="port-ghost" src="logo.png" alt="" />
           <p class="port-card-name">Composing Scores</p>
           <p class="port-card-meta">Film · Worship · Live <span></span> $250</p>
         </div>
@@ -340,7 +338,7 @@
 
       <div class="port-card music">
         <div class="port-card-inner">
-          <span class="port-ghost">B</span>
+          <img class="port-ghost" src="logo.png" alt="" />
           <p class="port-card-name">Programming</p>
           <p class="port-card-meta">Pre · Production · Post <span></span> $275</p>
         </div>
