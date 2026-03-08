@@ -104,6 +104,15 @@
       border: 1px solid rgba(255,255,255,.08);
       overflow: hidden;
       transition: border-color .2s;
+      position: relative;
+    }
+    .thumb-wm {
+      position: absolute;
+      top: 50%; left: 0;
+      transform: translateY(-50%);
+      width: 100%; height: auto;
+      opacity: 0.25;
+      pointer-events: none;
     }
     .gallery-thumb img {
       width: 48px;
@@ -310,6 +319,11 @@
     img.alt = `Preview page ${i + 1}`;
     img.loading = 'lazy';
     wrap.appendChild(img);
+    const wm = document.createElement('img');
+    wm.src = 'Branding/seal.png';
+    wm.className = 'thumb-wm';
+    wm.alt = '';
+    wrap.appendChild(wm);
     wrap.addEventListener('click', () => goTo(i));
     strip.appendChild(wrap);
   });
