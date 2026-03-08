@@ -49,7 +49,34 @@
       display: block;
       border: 1px solid rgba(255,255,255,.07);
     }
+    .gallery-footer {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .gallery-arrow {
+      flex-shrink: 0;
+      width: 30px;
+      height: 64px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.15);
+      color: var(--white);
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s, border-color .2s;
+      padding: 0;
+    }
+    .gallery-arrow:hover:not(:disabled) {
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.35);
+    }
+    .gallery-arrow:disabled { opacity: 0.2; cursor: default; }
     .gallery-thumbs {
+      flex: 1;
+      min-width: 0;
       display: flex;
       gap: 5px;
       overflow-x: auto;
@@ -137,7 +164,11 @@
         <div class="gallery-main">
           <img id="main-img" alt="Preview" />
         </div>
-        <div class="gallery-thumbs" id="thumbs"></div>
+        <div class="gallery-footer">
+          <button class="gallery-arrow prev" id="prev-btn" aria-label="Previous">&#8249;</button>
+          <div class="gallery-thumbs" id="thumbs"></div>
+          <button class="gallery-arrow next" id="next-btn" aria-label="Next">&#8250;</button>
+        </div>
       </div>
 
       <!-- RIGHT: Info + Description + Payment -->
@@ -195,6 +226,22 @@
 
   const mainImg = document.getElementById('main-img');
   const strip   = document.getElementById('thumbs');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  let current = 0;
+
+  function goTo(idx) {
+    current = idx;
+    mainImg.src = images[current];
+    const thumbEls = strip.querySelectorAll('.gallery-thumb');
+    thumbEls.forEach((t, i) => t.classList.toggle('active', i === current));
+    thumbEls[current].scrollIntoView({ block: 'nearest', inline: 'center' });
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === images.length - 1;
+  }
+
+  prevBtn.addEventListener('click', () => goTo(Math.max(0, current - 1)));
+  nextBtn.addEventListener('click', () => goTo(Math.min(images.length - 1, current + 1)));
 
   images.forEach((src, i) => {
     if (i === 0) mainImg.src = src;
@@ -205,13 +252,12 @@
     img.alt = `Preview page ${i + 1}`;
     img.loading = 'lazy';
     wrap.appendChild(img);
-    wrap.addEventListener('click', () => {
-      strip.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
-      wrap.classList.add('active');
-      mainImg.src = src;
-    });
+    wrap.addEventListener('click', () => goTo(i));
     strip.appendChild(wrap);
   });
+
+  prevBtn.disabled = true;
+  nextBtn.disabled = images.length <= 1;
 })();
 </script>
 </body>
