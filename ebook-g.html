@@ -13,57 +13,108 @@
       --brown:#7B3F00; --khaki:#C3B091; --beige:#F5F5DC;
       --wine:#722F37; --orange:#BF5700; --mustard:#FFDB58;
       --olive:#808000; --navy:#000080; --lilac:#C8A2C8;
-      --accent: #BF5700;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 26px 52px; display: flex; align-items: center; justify-content: space-between; background: linear-gradient(to bottom, rgba(0,0,0,.9), transparent); }
     .nav-logo img { height: 20px; display: block; filter: invert(1); }
     .nav-back { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--gray-d); text-decoration: none; transition: color .3s; }
     .nav-back:hover { color: var(--white); }
+
     .wrap { max-width: 1200px; margin: 0 auto; padding: 0 52px; }
-    .product-hero { padding: 130px 0 80px; }
-    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-    .cover-wrap { position: sticky; top: 110px; }
-    .cover-img { width: 100%; display: block; border: 1px solid rgba(255,255,255,.08); }
-    .info-eyebrow { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
-    .info-eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--accent); }
-    .info-title { font-family: 'Playfair Display', serif; font-size: clamp(26px, 3.5vw, 40px); font-weight: 400; line-height: 1.15; color: var(--white); margin-bottom: 10px; }
-    .info-sub { font-size: 13px; color: var(--gray-d); letter-spacing: .06em; margin-bottom: 32px; }
-    .info-price { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 400; color: var(--accent); margin-bottom: 8px; line-height: 1; }
-    .info-price-note { font-size: 11px; color: var(--gray-d); letter-spacing: .1em; margin-bottom: 36px; }
-    .info-divider { width: 100%; height: 1px; background: rgba(255,255,255,.08); margin: 32px 0; }
-    .payment-label { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--gray-d); margin-bottom: 16px; }
+
+    .product-page { padding: 110px 0 80px; }
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      align-items: start;
+    }
+
+    /* ── LEFT: Gallery ───────────────────────── */
+    .left-panel {
+      position: sticky;
+      top: 90px;
+      padding: 40px 48px 40px 0;
+      border-right: 1px solid rgba(255,255,255,.07);
+    }
+    .gallery-main { margin-bottom: 10px; }
+    .gallery-main img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid rgba(255,255,255,.07);
+    }
+    .gallery-thumbs {
+      display: flex;
+      gap: 5px;
+      overflow-x: auto;
+      padding-bottom: 3px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,.15) transparent;
+    }
+    .gallery-thumbs::-webkit-scrollbar { height: 3px; }
+    .gallery-thumbs::-webkit-scrollbar-track { background: transparent; }
+    .gallery-thumbs::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 2px; }
+    .gallery-thumb {
+      flex-shrink: 0;
+      width: 48px;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,.08);
+      overflow: hidden;
+      transition: border-color .2s;
+    }
+    .gallery-thumb img {
+      width: 48px;
+      height: 64px;
+      object-fit: cover;
+      display: block;
+      opacity: 0.45;
+      transition: opacity .2s;
+    }
+    .gallery-thumb.active { border-color: var(--orange); }
+    .gallery-thumb.active img,
+    .gallery-thumb:hover img { opacity: 1; }
+
+    /* ── RIGHT ───────────────────────────────── */
+    .right-panel { padding: 40px 0 40px 56px; }
+
+    .info-eyebrow { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--orange); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+    .info-eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--orange); }
+    .info-title { font-family: 'Playfair Display', serif; font-size: clamp(24px, 3vw, 36px); font-weight: 400; line-height: 1.15; color: var(--white); margin-bottom: 8px; }
+    .info-pages { font-size: 11px; letter-spacing: .12em; color: var(--orange); margin-bottom: 28px; }
+    .divider { width: 100%; height: 1px; background: rgba(255,255,255,.08); margin: 28px 0; }
+
+    .desc-intro { font-size: 14px; line-height: 1.9; color: rgba(255,255,255,.6); margin-bottom: 24px; }
+    .desc-section-label { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--orange); margin-bottom: 10px; margin-top: 20px; }
+    .desc-list { display: flex; flex-direction: column; gap: 7px; margin-bottom: 4px; }
+    .desc-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 12.5px; color: rgba(255,255,255,.55); list-style: none; line-height: 1.5; }
+    .desc-list li::before { content: ''; width: 3px; height: 3px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+    .price-row { display: flex; align-items: baseline; gap: 14px; margin-bottom: 6px; }
+    .info-price { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 400; color: var(--orange); line-height: 1; }
+    .info-price-note { font-size: 11px; color: var(--gray-d); }
+    .payment-label { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--gray-d); margin-bottom: 12px; }
     .payment-btns { display: flex; flex-direction: column; gap: 10px; }
-    .pay-btn { display: flex; align-items: center; justify-content: space-between; padding: 15px 22px; text-decoration: none; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; font-weight: 500; transition: background .3s, color .3s; border: 1px solid transparent; }
-    .pay-arrow { font-size: 14px; }
+    .pay-btn { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; text-decoration: none; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; font-weight: 500; transition: background .3s, color .3s; border: 1px solid transparent; }
+    .pay-arrow { font-size: 13px; }
     .pay-paypal  { background: var(--orange); color: var(--black); }
     .pay-paypal:hover  { background: var(--brown); color: var(--white); }
     .pay-cashapp { background: transparent; color: var(--white); border-color: rgba(255,255,255,.2); }
     .pay-cashapp:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.4); }
     .pay-venmo   { background: transparent; color: var(--white); border-color: rgba(255,255,255,.2); }
     .pay-venmo:hover   { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.4); }
-    .pay-note { font-size: 11px; color: rgba(255,255,255,.3); margin-top: 14px; line-height: 1.6; }
-    .desc-section { padding: 80px 0; border-top: 1px solid rgba(255,255,255,.07); }
-    .desc-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; }
-    .desc-label { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--accent); padding-top: 4px; }
-    .desc-body h2 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 400; color: var(--white); margin-bottom: 20px; line-height: 1.25; }
-    .desc-body p { font-size: 14px; line-height: 1.95; color: rgba(255,255,255,.6); max-width: 560px; }
-    .desc-body p + p { margin-top: 14px; }
-    .desc-list { margin-top: 28px; display: flex; flex-direction: column; gap: 10px; }
-    .desc-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 13px; color: rgba(255,255,255,.55); list-style: none; }
-    .desc-list li::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); margin-top: 7px; flex-shrink: 0; }
-    .preview-section { padding: 80px 0; border-top: 1px solid rgba(255,255,255,.07); }
-    .preview-label { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--accent); margin-bottom: 36px; }
-    .preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .preview-card { aspect-ratio: 3/4; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 13px; color: rgba(255,255,255,.2); letter-spacing: .06em; text-align: center; padding: 20px; }
+    .pay-note { font-size: 11px; color: rgba(255,255,255,.28); margin-top: 12px; line-height: 1.6; }
+
     footer { background: var(--gray-l); padding: 26px 52px; display: flex; align-items: center; justify-content: space-between; }
     footer p { font-size: 10px; letter-spacing: .1em; color: rgba(0,0,0,.5); }
+
     @media (max-width: 900px) {
-      .hero-grid, .desc-grid { grid-template-columns: 1fr; gap: 40px; }
-      .cover-wrap { position: static; }
-      .preview-grid { grid-template-columns: repeat(2, 1fr); }
+      .product-grid { grid-template-columns: 1fr; }
+      .left-panel { position: static; padding: 40px 0 0; border-right: none; border-bottom: 1px solid rgba(255,255,255,.07); padding-bottom: 40px; }
+      .right-panel { padding: 40px 0; }
       nav, .wrap, footer { padding-left: 28px; padding-right: 28px; }
     }
   </style>
@@ -75,19 +126,93 @@
   <a href="ebook.html" class="nav-back">← All E-Books</a>
 </nav>
 
-<section class="product-hero">
+<div class="product-page">
   <div class="wrap">
-    <div class="hero-grid">
-      <div class="cover-wrap">
-        <img class="cover-img" src="TUG_G.png" alt="The Ultimate Guide — Guitar" />
+    <div class="product-grid">
+
+      <!-- LEFT: Gallery -->
+      <div class="left-panel">
+        <div class="gallery-main">
+          <img id="main-img" alt="Preview" />
+        </div>
+        <div class="gallery-thumbs" id="thumbs"></div>
       </div>
-      <div class="info-panel">
+
+      <!-- RIGHT: Info + Description + Payment -->
+      <div class="right-panel">
         <p class="info-eyebrow">The Ultimate Guide · Guitar</p>
-        <h1 class="info-title">The Ultimate Guide —<br>Guitar</h1>
-        <p class="info-sub">Digital PDF · Instant delivery</p>
-        <p class="info-price">$10</p>
-        <p class="info-price-note">One-time purchase · No subscription</p>
-        <div class="info-divider"></div>
+        <h1 class="info-title">Guitar</h1>
+        <p class="info-pages">67 pages · Scales, Arpeggios, Chords &amp; Triads</p>
+
+        <p class="desc-intro">Chords, scales, arpeggios, and triads — everything a guitarist needs to understand the fretboard and play with purpose. Clean charts built for daily practice and real-world application.</p>
+
+        <p class="desc-section-label">Scales</p>
+        <ul class="desc-list">
+          <li>Major</li>
+          <li>Major Pentatonic</li>
+          <li>Major Blues</li>
+          <li>Natural Minor</li>
+          <li>Natural Minor Pentatonic</li>
+          <li>Minor Blues</li>
+          <li>Harmonic Minor</li>
+          <li>Melodic Minor</li>
+        </ul>
+
+        <p class="desc-section-label">Arpeggios</p>
+        <ul class="desc-list">
+          <li>Major</li>
+          <li>Minor</li>
+          <li>Diminished</li>
+          <li>Augmented</li>
+          <li>Major 7th</li>
+          <li>Minor 7th</li>
+          <li>Dominant 7th</li>
+          <li>Half-Diminished</li>
+          <li>Diminished 7th</li>
+          <li>Major 9th</li>
+          <li>Minor 9th</li>
+          <li>Major 6th</li>
+          <li>Minor 6th</li>
+          <li>Suspended 4th</li>
+        </ul>
+
+        <p class="desc-section-label">Chords</p>
+        <ul class="desc-list">
+          <li>Major</li>
+          <li>Minor</li>
+          <li>Diminished</li>
+          <li>Augmented</li>
+          <li>Major 7th</li>
+          <li>Minor 7th</li>
+          <li>Dominant 7th</li>
+          <li>Half-Diminished</li>
+          <li>Diminished 7th</li>
+          <li>Major 9th</li>
+          <li>Minor 9th</li>
+          <li>Major 6th</li>
+          <li>Minor 6th</li>
+          <li>Suspended 4th</li>
+        </ul>
+
+        <p class="desc-section-label">Triads</p>
+        <ul class="desc-list">
+          <li>Major</li>
+          <li>Minor</li>
+          <li>Diminished</li>
+          <li>Augmented</li>
+          <li>Suspended 2nd</li>
+          <li>Suspended 4th</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <div class="price-row">
+          <p class="info-price">$10</p>
+          <p class="info-price-note">One-time · No subscription</p>
+        </div>
+
+        <div class="divider"></div>
+
         <p class="payment-label">Choose your payment method</p>
         <div class="payment-btns">
           <a href="#" class="pay-btn pay-paypal" target="_blank">PayPal <span class="pay-arrow">→</span></a>
@@ -96,44 +221,43 @@
         </div>
         <p class="pay-note">After payment, your PDF will be delivered to your email within 24 hours.</p>
       </div>
-    </div>
-  </div>
-</section>
 
-<section class="desc-section">
-  <div class="wrap">
-    <div class="desc-grid">
-      <p class="desc-label">About this guide</p>
-      <div class="desc-body">
-        <h2>Chords, technique, and playing with purpose.</h2>
-        <p>The Ultimate Guide — Guitar covers what every guitarist needs to know — from chord construction and scale fundamentals to lead technique and real musical application. This isn't a theory textbook; it's a practical guide built from real playing experience.</p>
-        <p>Clear, direct, and designed to get you moving on the instrument with confidence and intention.</p>
-        <ul class="desc-list">
-          <li>Chord construction and voicings</li>
-          <li>Major and minor scale fundamentals</li>
-          <li>Lead technique and phrasing</li>
-          <li>Applying theory in worship, soul, and contemporary styles</li>
-          <li>Delivered as PDF — read anywhere, anytime</li>
-        </ul>
-      </div>
     </div>
   </div>
-</section>
-
-<section class="preview-section">
-  <div class="wrap">
-    <p class="preview-label">Preview</p>
-    <div class="preview-grid">
-      <div class="preview-card">Sample pages<br>coming soon</div>
-      <div class="preview-card">Sample pages<br>coming soon</div>
-      <div class="preview-card">Sample pages<br>coming soon</div>
-    </div>
-  </div>
-</section>
+</div>
 
 <footer>
   <p>© 2026 The Eagle and The Blackbird</p>
   <p>Film · Music · Brand &nbsp;|&nbsp; South Florida</p>
 </footer>
+
+<script>
+(function () {
+  const folder = 'The Ultimate Guide - Guitar Preview';
+  const images = Array.from({ length: 27 }, (_, i) =>
+    `${folder}/${folder}-${i + 1}.png`
+  );
+
+  const mainImg = document.getElementById('main-img');
+  const strip   = document.getElementById('thumbs');
+
+  images.forEach((src, i) => {
+    if (i === 0) mainImg.src = src;
+    const wrap = document.createElement('div');
+    wrap.className = 'gallery-thumb' + (i === 0 ? ' active' : '');
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = `Preview page ${i + 1}`;
+    img.loading = 'lazy';
+    wrap.appendChild(img);
+    wrap.addEventListener('click', () => {
+      strip.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+      wrap.classList.add('active');
+      mainImg.src = src;
+    });
+    strip.appendChild(wrap);
+  });
+})();
+</script>
 </body>
 </html>
