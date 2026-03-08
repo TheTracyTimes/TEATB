@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — The Eagle and The Blackbird</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --white:   #FFFFFF; --black:   #000000;
+      --gray-d:  #A9A9A9; --gray-l:  #D3D3D3;
+      --brown:   #7B3F00; --khaki:   #C3B091; --beige: #F5F5DC;
+      --wine:    #722F37; --orange:  #BF5700;
+      --mustard: #FFDB58; --olive:   #808000; --navy: #000080; --lilac: #C8A2C8;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black); color: var(--white);
+      font-family: 'DM Sans', sans-serif; font-size: 14px;
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ──────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 26px 52px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(0,0,0,.85) 0%, transparent 100%);
+    }
+    .nav-logo img { height: 20px; display: block; filter: invert(1); }
+    .nav-back {
+      font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gray-d); text-decoration: none; transition: color .3s;
+    }
+    .nav-back:hover { color: var(--white); }
+
+    /* ── Wrap ─────────────────────────────────── */
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 52px; }
+
+    /* ── Page header ──────────────────────────── */
+    .port-header { padding: 160px 0 72px; text-align: center; }
+    .port-eyebrow {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 20px;
+    }
+    .port-eyebrow::before, .port-eyebrow::after {
+      content: ''; width: 20px; height: 1px; background: var(--orange);
+    }
+    .port-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(48px, 7vw, 88px);
+      font-weight: 400; color: var(--white); line-height: 1; letter-spacing: -.01em;
+    }
+    .port-header p {
+      margin-top: 20px; font-size: 14px; color: var(--gray-d);
+      letter-spacing: .04em;
+    }
+
+    /* ── Section ──────────────────────────────── */
+    .port-section { padding: 90px 0; }
+    .port-section:nth-child(odd)  { background: var(--black); }
+    .port-section:nth-child(even) { background: #0a0a0a; }
+
+    .section-head { margin-bottom: 36px; display: flex; align-items: baseline; gap: 16px; }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 3.5vw, 42px); font-weight: 400; color: var(--white);
+    }
+    .section-bar {
+      flex: 1; height: 1px; background: rgba(255,255,255,.07);
+    }
+    .section-count {
+      font-size: 10px; letter-spacing: .2em; color: var(--gray-d);
+      text-transform: uppercase;
+    }
+
+    /* ── Grid ─────────────────────────────────── */
+    .port-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    /* ── Card ─────────────────────────────────── */
+    .port-card {
+      position: relative; overflow: hidden;
+      cursor: pointer; group: true;
+    }
+    .port-card-inner {
+      position: relative; width: 100%;
+      aspect-ratio: 3 / 4;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 22px 20px;
+      border: 1px solid rgba(255,255,255,.07);
+      background: rgba(255,255,255,.03);
+      overflow: hidden;
+      transition: border-color .35s, background .35s;
+    }
+    .port-card:hover .port-card-inner {
+      border-color: rgba(255,255,255,.2);
+      background: rgba(255,255,255,.06);
+    }
+
+    /* Accent top bar */
+    .port-card-inner::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; transition: height .35s;
+    }
+    .port-card:hover .port-card-inner::before { height: 4px; }
+
+    /* Section accent colors */
+    .photo .port-card-inner::before  { background: var(--brown); }
+    .video .port-card-inner::before  { background: var(--navy); }
+    .music .port-card-inner::before  { background: var(--wine); }
+
+    /* Ghost letter watermark */
+    .port-ghost {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -58%);
+      font-family: 'Playfair Display', serif;
+      font-size: 100px; font-weight: 400; letter-spacing: -.04em;
+      color: var(--white); opacity: .04; user-select: none;
+      transition: opacity .35s;
+      line-height: 1;
+    }
+    .port-card:hover .port-ghost { opacity: .07; }
+
+    /* Label */
+    .port-card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px; font-weight: 400; color: var(--white);
+      line-height: 1.25; margin-bottom: 6px;
+      position: relative; z-index: 1;
+    }
+    .port-card-meta {
+      font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gray-d); position: relative; z-index: 1;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .port-card-meta span { width: 1px; height: 8px; background: rgba(255,255,255,.2); }
+
+    /* Music cards slightly shorter */
+    .music .port-card-inner { aspect-ratio: 4 / 3; }
+
+    /* ── Footer ───────────────────────────────── */
+    footer {
+      background: var(--gray-l); padding: 26px 52px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    footer p { font-size: 10px; letter-spacing: .1em; color: rgba(0,0,0,.5); }
+
+    /* ── Responsive ───────────────────────────── */
+    @media (max-width: 960px) {
+      .port-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      nav, .wrap, footer { padding-left: 28px; padding-right: 28px; }
+    }
+    @media (max-width: 560px) {
+      .port-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .port-header { padding: 120px 0 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Nav ───────────────────────────────────── -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="EB" />
+  </a>
+  <a href="index.html" class="nav-back">← Back</a>
+</nav>
+
+<!-- ── Header ────────────────────────────────── -->
+<header class="port-header">
+  <div class="wrap">
+    <p class="port-eyebrow">The Eagle &amp; The Blackbird</p>
+    <h1>Portfolio</h1>
+    <p>Film · Photography · Music</p>
+  </div>
+</header>
+
+<!-- ── Photography ───────────────────────────── -->
+<section class="port-section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">Photography</h2>
+      <div class="section-bar"></div>
+      <span class="section-count">04 services</span>
+    </div>
+    <div class="port-grid">
+
+      <div class="port-card photo">
+        <div class="port-card-inner">
+          <span class="port-ghost">E</span>
+          <p class="port-card-name">Portrait Session</p>
+          <p class="port-card-meta">1 hr · 20 images <span></span> $100</p>
+        </div>
+      </div>
+
+      <div class="port-card photo">
+        <div class="port-card-inner">
+          <span class="port-ghost">E</span>
+          <p class="port-card-name">Extended Portrait Session</p>
+          <p class="port-card-meta">2 hrs · 40 images <span></span> $200</p>
+        </div>
+      </div>
+
+      <div class="port-card photo">
+        <div class="port-card-inner">
+          <span class="port-ghost">E</span>
+          <p class="port-card-name">Event Coverage — Half Day</p>
+          <p class="port-card-meta">Up to 4 hrs · 75+ images <span></span> $400</p>
+        </div>
+      </div>
+
+      <div class="port-card photo">
+        <div class="port-card-inner">
+          <span class="port-ghost">E</span>
+          <p class="port-card-name">Event Coverage — Full Day</p>
+          <p class="port-card-meta">Up to 8 hrs · 150+ images <span></span> $800</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Videography ────────────────────────────── -->
+<section class="port-section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">Videography</h2>
+      <div class="section-bar"></div>
+      <span class="section-count">04 services</span>
+    </div>
+    <div class="port-grid">
+
+      <div class="port-card video">
+        <div class="port-card-inner">
+          <span class="port-ghost">E</span>
+          <p class="port-card-name">Promotional Video</p>
+          <p class="port-card-meta">1–3 min <span></span> $300</p>
+        </div>
+      </div>
+
+      <div class="port-card video">
+        <div class="port-card-inner">
+          <span class="port-ghost">E</span>
+          <p class="port-card-name">Event Highlight Video</p>
+          <p class="port-card-meta">Up to 4 hrs · 2–3 min edit <span></span> $400</p>
+        </div>
+      </div>
+
+      <div class="port-card video">
+        <div class="port-card-inner">
+          <span class="port-ghost">E</span>
+          <p class="port-card-name">Livestream Production</p>
+          <p class="port-card-meta">Multi-camera · Up to 3 hrs <span></span> $600</p>
+        </div>
+      </div>
+
+      <div class="port-card video">
+        <div class="port-card-inner">
+          <span class="port-ghost">E</span>
+          <p class="port-card-name">Full Event Coverage</p>
+          <p class="port-card-meta">Full day · 5–8 min edit <span></span> $800</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Music Production ───────────────────────── -->
+<section class="port-section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">Music Production</h2>
+      <div class="section-bar"></div>
+      <span class="section-count">08 services</span>
+    </div>
+    <div class="port-grid">
+
+      <div class="port-card music">
+        <div class="port-card-inner">
+          <span class="port-ghost">B</span>
+          <p class="port-card-name">Audio Mixing / Mastering</p>
+          <p class="port-card-meta">Recordings &amp; podcasts <span></span> $100</p>
+        </div>
+      </div>
+
+      <div class="port-card music">
+        <div class="port-card-inner">
+          <span class="port-ghost">B</span>
+          <p class="port-card-name">Custom Background Music</p>
+          <p class="port-card-meta">Up to 3 min <span></span> $150</p>
+        </div>
+      </div>
+
+      <div class="port-card music">
+        <div class="port-card-inner">
+          <span class="port-ghost">B</span>
+          <p class="port-card-name">Musician</p>
+          <p class="port-card-meta">Session · Live · Studio <span></span> $175</p>
+        </div>
+      </div>
+
+      <div class="port-card music">
+        <div class="port-card-inner">
+          <span class="port-ghost">B</span>
+          <p class="port-card-name">Live Music Performance</p>
+          <p class="port-card-meta">Up to 2 hrs <span></span> $200</p>
+        </div>
+      </div>
+
+      <div class="port-card music">
+        <div class="port-card-inner">
+          <span class="port-ghost">B</span>
+          <p class="port-card-name">Song Arrangements</p>
+          <p class="port-card-meta">New instrumentation &amp; style <span></span> $200</p>
+        </div>
+      </div>
+
+      <div class="port-card music">
+        <div class="port-card-inner">
+          <span class="port-ghost">B</span>
+          <p class="port-card-name">Full Production Package</p>
+          <p class="port-card-meta">Music · Sound design · Mix <span></span> $250</p>
+        </div>
+      </div>
+
+      <div class="port-card music">
+        <div class="port-card-inner">
+          <span class="port-ghost">B</span>
+          <p class="port-card-name">Composing Scores</p>
+          <p class="port-card-meta">Film · Worship · Live <span></span> $250</p>
+        </div>
+      </div>
+
+      <div class="port-card music">
+        <div class="port-card-inner">
+          <span class="port-ghost">B</span>
+          <p class="port-card-name">Programming</p>
+          <p class="port-card-meta">Pre · Production · Post <span></span> $275</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────── -->
+<footer>
+  <p>© 2026 The Eagle and The Blackbird</p>
+  <p>Film · Music · Brand &nbsp;|&nbsp; South Florida</p>
+</footer>
+
+</body>
+</html>

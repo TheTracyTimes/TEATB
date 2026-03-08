@@ -450,6 +450,15 @@
       border-top: 1px solid rgba(255,255,255,.05); text-align: center;
     }
     #contact .sh { color: var(--white); margin-bottom: 26px; }
+    .port-btn {
+      display: inline-block; padding: 18px 52px; margin-bottom: 44px;
+      background: var(--orange); color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px; letter-spacing: .34em; text-transform: uppercase;
+      font-weight: 500; text-decoration: none;
+      transition: background .3s, color .3s;
+    }
+    .port-btn:hover { background: var(--brown); color: var(--white); }
     .ct-sub {
       font-family: 'Playfair Display', serif; font-style: italic;
       font-size: 18px; color: var(--gray-d); margin-bottom: 44px;
@@ -936,9 +945,7 @@
 <section id="contact">
   <div class="wrap">
     <div class="rv">
-      <h2 class="sh" style="font-size:clamp(42px,6.5vw,88px);line-height:.95;margin-bottom:24px">
-        Start a<br>Conversation
-      </h2>
+      <a href="portfolio.html" class="port-btn">Portfolio</a>
       <p class="ct-sub">Every great project begins with a single exchange.</p>
       <a href="mailto:studio@eagleandblackbird.com" class="ct-email">studio@eagleandblackbird.com</a>
       <p class="ct-loc">South Florida &nbsp;·&nbsp; Available for Travel</p>
