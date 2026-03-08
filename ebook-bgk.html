@@ -29,7 +29,7 @@
     .product-page { padding: 110px 0 80px; }
     .product-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 0;
       align-items: start;
     }
@@ -40,6 +40,7 @@
       top: 90px;
       padding: 40px 48px 40px 0;
       border-right: 1px solid rgba(255,255,255,.07);
+      min-width: 0;
     }
     .gallery-main { margin-bottom: 10px; }
     .gallery-main img {
