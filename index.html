@@ -231,7 +231,9 @@
     #book .sl.ol::before { background: var(--lilac); }
     .film-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-top: 60px; }
     .film-about p { font-size: 14.5px; line-height: 1.95; color: rgba(255,255,255,.72); max-width: 400px; margin-bottom: 32px; }
-    .software-logos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
+    .cta-wrap { display: block; margin-top: 36px; }
+    .cta-wrap .cta-btn { margin-top: 0; }
+    .software-logos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
     .software-logos img { width: 100%; height: auto; display: block; opacity: .65; transition: opacity .25s; }
     .software-logos img:hover { opacity: 1; }
     #film .pn { color: var(--white); }
@@ -634,14 +636,16 @@
       <div class="film-about rv" style="transition-delay:.1s">
         <p>The eagle sees what others cannot. With precision, patience, and a sweeping perspective, we bring your vision to life — events, documentaries, promos, and everything in between.</p>
         <p>South Florida based. Available for travel.</p>
-        <a href="#book" class="cta-btn cta-fill">Book a Film Project</a>
-        <div class="software-logos">
-          <img src="adobe-premiere-pro.png" alt="Adobe Premiere Pro" />
-          <img src="final-cut-pro.png" alt="Final Cut Pro" />
-          <img src="davinci-resolve.png" alt="DaVinci Resolve" />
-          <img src="adobe-photoshop.png" alt="Adobe Photoshop" />
-          <img src="adobe-illustrator.png" alt="Adobe Illustrator" />
-          <img src="adobe-indesign.png" alt="Adobe InDesign" />
+        <div class="cta-wrap">
+          <a href="#book" class="cta-btn cta-fill">Book a Film Project</a>
+          <div class="software-logos">
+            <img src="adobe-premiere-pro.png" alt="Adobe Premiere Pro" />
+            <img src="final-cut-pro.png" alt="Final Cut Pro" />
+            <img src="davinci-resolve.png" alt="DaVinci Resolve" />
+            <img src="adobe-photoshop.png" alt="Adobe Photoshop" />
+            <img src="adobe-illustrator.png" alt="Adobe Illustrator" />
+            <img src="adobe-indesign.png" alt="Adobe InDesign" />
+          </div>
         </div>
       </div>
       <div class="rv" style="transition-delay:.2s">
@@ -710,11 +714,13 @@
       <div class="music-about rv" style="transition-delay:.1s">
         <p>The blackbird sings because it must. We produce music that carries weight — beats, compositions, live performance, and audio work that sounds like truth.</p>
         <p>Original. Soulful. Built to outlast the moment.</p>
-        <a href="#book" class="cta-btn cta-out-wine">Book a Music Project</a>
-        <div class="software-logos">
-          <img src="avid-pro-tools.png" alt="Avid Pro Tools" />
-          <img src="final-cut-pro.png" alt="Final Cut Pro" />
-          <img src="ableton-live.png" alt="Ableton Live" />
+        <div class="cta-wrap">
+          <a href="#book" class="cta-btn cta-out-wine">Book a Music Project</a>
+          <div class="software-logos">
+            <img src="avid-pro-tools.png" alt="Avid Pro Tools" />
+            <img src="final-cut-pro.png" alt="Final Cut Pro" />
+            <img src="ableton-live.png" alt="Ableton Live" />
+          </div>
         </div>
       </div>
       <div class="rv" style="transition-delay:.2s">
@@ -1086,6 +1092,17 @@
       e.target.reset();
     }, 4000);
   }
+
+  /* Software logo grid — match width of sibling CTA button */
+  function syncLogoWidths() {
+    document.querySelectorAll('.cta-wrap').forEach(function(wrap) {
+      var btn = wrap.querySelector('.cta-btn');
+      var logos = wrap.querySelector('.software-logos');
+      if (btn && logos) logos.style.width = btn.offsetWidth + 'px';
+    });
+  }
+  window.addEventListener('load', syncLogoWidths);
+  window.addEventListener('resize', syncLogoWidths);
 </script>
 
 </body>
