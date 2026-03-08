@@ -42,12 +42,23 @@
       border-right: 1px solid rgba(255,255,255,.07);
       min-width: 0;
     }
-    .gallery-main { margin-bottom: 10px; }
+    .gallery-main { position: relative; margin-bottom: 10px; }
     .gallery-main img {
       width: 100%;
       height: auto;
       display: block;
       border: 1px solid rgba(255,255,255,.07);
+    }
+    .gallery-watermark {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 100%;
+      height: auto;
+      opacity: 0.25;
+      pointer-events: none;
+      border: none !important;
     }
     .gallery-footer {
       display: flex;
@@ -163,6 +174,7 @@
       <div class="left-panel">
         <div class="gallery-main">
           <img id="main-img" alt="Preview" />
+          <img class="gallery-watermark" src="seal.png" alt="" />
         </div>
         <div class="gallery-footer">
           <button class="gallery-arrow prev" id="prev-btn" aria-label="Previous">&#8249;</button>
