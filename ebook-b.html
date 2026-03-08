@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Ultimate Guide — Bass Guitar · E&B</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --white:#FFFFFF; --black:#000000; --gray-d:#A9A9A9; --gray-l:#D3D3D3;
+      --brown:#7B3F00; --khaki:#C3B091; --beige:#F5F5DC;
+      --wine:#722F37; --orange:#BF5700; --mustard:#FFDB58;
+      --olive:#808000; --navy:#000080; --lilac:#C8A2C8;
+      --accent: #BF5700;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 26px 52px; display: flex; align-items: center; justify-content: space-between; background: linear-gradient(to bottom, rgba(0,0,0,.9), transparent); }
+    .nav-logo img { height: 20px; display: block; filter: invert(1); }
+    .nav-back { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--gray-d); text-decoration: none; transition: color .3s; }
+    .nav-back:hover { color: var(--white); }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 52px; }
+    .product-hero { padding: 130px 0 80px; }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .cover-wrap { position: sticky; top: 110px; }
+    .cover-img { width: 100%; display: block; border: 1px solid rgba(255,255,255,.08); }
+    .info-eyebrow { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+    .info-eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--accent); }
+    .info-title { font-family: 'Playfair Display', serif; font-size: clamp(26px, 3.5vw, 40px); font-weight: 400; line-height: 1.15; color: var(--white); margin-bottom: 10px; }
+    .info-sub { font-size: 13px; color: var(--gray-d); letter-spacing: .06em; margin-bottom: 32px; }
+    .info-price { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 400; color: var(--accent); margin-bottom: 8px; line-height: 1; }
+    .info-price-note { font-size: 11px; color: var(--gray-d); letter-spacing: .1em; margin-bottom: 36px; }
+    .info-divider { width: 100%; height: 1px; background: rgba(255,255,255,.08); margin: 32px 0; }
+    .payment-label { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--gray-d); margin-bottom: 16px; }
+    .payment-btns { display: flex; flex-direction: column; gap: 10px; }
+    .pay-btn { display: flex; align-items: center; justify-content: space-between; padding: 15px 22px; text-decoration: none; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; font-weight: 500; transition: background .3s, color .3s; border: 1px solid transparent; }
+    .pay-arrow { font-size: 14px; }
+    .pay-paypal  { background: var(--orange); color: var(--black); }
+    .pay-paypal:hover  { background: var(--brown); color: var(--white); }
+    .pay-cashapp { background: transparent; color: var(--white); border-color: rgba(255,255,255,.2); }
+    .pay-cashapp:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.4); }
+    .pay-venmo   { background: transparent; color: var(--white); border-color: rgba(255,255,255,.2); }
+    .pay-venmo:hover   { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.4); }
+    .pay-note { font-size: 11px; color: rgba(255,255,255,.3); margin-top: 14px; line-height: 1.6; }
+    .desc-section { padding: 80px 0; border-top: 1px solid rgba(255,255,255,.07); }
+    .desc-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; }
+    .desc-label { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--accent); padding-top: 4px; }
+    .desc-body h2 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 400; color: var(--white); margin-bottom: 20px; line-height: 1.25; }
+    .desc-body p { font-size: 14px; line-height: 1.95; color: rgba(255,255,255,.6); max-width: 560px; }
+    .desc-body p + p { margin-top: 14px; }
+    .desc-list { margin-top: 28px; display: flex; flex-direction: column; gap: 10px; }
+    .desc-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 13px; color: rgba(255,255,255,.55); list-style: none; }
+    .desc-list li::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); margin-top: 7px; flex-shrink: 0; }
+    .preview-section { padding: 80px 0; border-top: 1px solid rgba(255,255,255,.07); }
+    .preview-label { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--accent); margin-bottom: 36px; }
+    .preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .preview-card { aspect-ratio: 3/4; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 13px; color: rgba(255,255,255,.2); letter-spacing: .06em; text-align: center; padding: 20px; }
+    footer { background: var(--gray-l); padding: 26px 52px; display: flex; align-items: center; justify-content: space-between; }
+    footer p { font-size: 10px; letter-spacing: .1em; color: rgba(0,0,0,.5); }
+    @media (max-width: 900px) {
+      .hero-grid, .desc-grid { grid-template-columns: 1fr; gap: 40px; }
+      .cover-wrap { position: static; }
+      .preview-grid { grid-template-columns: repeat(2, 1fr); }
+      nav, .wrap, footer { padding-left: 28px; padding-right: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="logo.png" alt="EB" /></a>
+  <a href="ebook.html" class="nav-back">← All E-Books</a>
+</nav>
+
+<section class="product-hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="cover-wrap">
+        <img class="cover-img" src="TUG_B.png" alt="The Ultimate Guide — Bass Guitar" />
+      </div>
+      <div class="info-panel">
+        <p class="info-eyebrow">The Ultimate Guide · Bass Guitar</p>
+        <h1 class="info-title">The Ultimate Guide —<br>Bass Guitar</h1>
+        <p class="info-sub">Digital PDF · Instant delivery</p>
+        <p class="info-price">$10</p>
+        <p class="info-price-note">One-time purchase · No subscription</p>
+        <div class="info-divider"></div>
+        <p class="payment-label">Choose your payment method</p>
+        <div class="payment-btns">
+          <a href="#" class="pay-btn pay-paypal" target="_blank">PayPal <span class="pay-arrow">→</span></a>
+          <a href="#" class="pay-btn pay-cashapp" target="_blank">Cash App <span class="pay-arrow">→</span></a>
+          <a href="#" class="pay-btn pay-venmo" target="_blank">Venmo <span class="pay-arrow">→</span></a>
+        </div>
+        <p class="pay-note">After payment, your PDF will be delivered to your email within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="desc-section">
+  <div class="wrap">
+    <div class="desc-grid">
+      <p class="desc-label">About this guide</p>
+      <div class="desc-body">
+        <h2>Groove, technique, and the fundamentals of bass.</h2>
+        <p>The Ultimate Guide — Bass Guitar is built for musicians who want to understand the instrument, not just play it. Covering technique, music theory, and how to lock in with a rhythm section, this guide gives you a real foundation.</p>
+        <p>Whether you're picking up the bass for the first time or looking to sharpen what you already know, this guide meets you where you are and moves you forward.</p>
+        <ul class="desc-list">
+          <li>Proper technique and hand positioning</li>
+          <li>Reading rhythm and locking in with drums</li>
+          <li>Music theory fundamentals for bass players</li>
+          <li>Groove, feel, and how to serve the song</li>
+          <li>Delivered as PDF — read anywhere, anytime</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="preview-section">
+  <div class="wrap">
+    <p class="preview-label">Preview</p>
+    <div class="preview-grid">
+      <div class="preview-card">Sample pages<br>coming soon</div>
+      <div class="preview-card">Sample pages<br>coming soon</div>
+      <div class="preview-card">Sample pages<br>coming soon</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 The Eagle and The Blackbird</p>
+  <p>Film · Music · Brand &nbsp;|&nbsp; South Florida</p>
+</footer>
+</body>
+</html>
