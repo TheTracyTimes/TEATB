@@ -20,8 +20,13 @@
 
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 26px 52px; display: flex; align-items: center; justify-content: space-between; background: linear-gradient(to bottom, rgba(0,0,0,.9), transparent); }
     .nav-logo img { height: 20px; display: block; filter: invert(1); }
+    .nav-right { display: flex; align-items: center; gap: 24px; }
     .nav-back { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--gray-d); text-decoration: none; transition: color .3s; }
     .nav-back:hover { color: var(--white); }
+    .nav-cart { position: relative; color: var(--gray-d); text-decoration: none; display: flex; align-items: center; transition: color .3s; }
+    .nav-cart:hover { color: var(--white); }
+    .nav-cart svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .cart-count { position: absolute; top: -6px; right: -8px; background: var(--mustard); color: var(--black); font-size: 9px; font-weight: 600; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .2s; }
 
     .wrap { max-width: 1200px; margin: 0 auto; padding: 0 52px; }
 
@@ -167,7 +172,13 @@
 
 <nav>
   <a href="index.html" class="nav-logo"><img src="Branding/logo.png" alt="EB" /></a>
-  <a href="ebook.html" class="nav-back">← All E-Books</a>
+  <div class="nav-right">
+    <a href="ebook.html" class="nav-back">← All E-Books</a>
+    <a href="cart.html" class="nav-cart" aria-label="Cart">
+      <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="cart-count" id="nav-cart-count"></span>
+    </a>
+  </div>
 </nav>
 
 <div class="product-page">
@@ -328,6 +339,14 @@
     addToCart();
     window.location.href = 'cart.html';
   });
+
+  function updateCartBadge() {
+    const n = getCart().length;
+    const badge = document.getElementById('nav-cart-count');
+    if (badge) { badge.textContent = n; badge.style.opacity = n > 0 ? '1' : '0'; }
+  }
+  updateCartBadge();
+  document.getElementById('cart-btn').addEventListener('click', updateCartBadge);
 })();
 </script>
 </body>
