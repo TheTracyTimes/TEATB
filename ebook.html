@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-Book — The Eagle and The Blackbird</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --white:   #FFFFFF; --black:   #000000;
+      --gray-d:  #A9A9A9; --gray-l:  #D3D3D3;
+      --brown:   #7B3F00; --khaki:   #C3B091; --beige: #F5F5DC;
+      --wine:    #722F37; --orange:  #BF5700;
+      --mustard: #FFDB58; --olive:   #808000; --navy: #000080; --lilac: #C8A2C8;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black); color: var(--white);
+      font-family: 'DM Sans', sans-serif; font-size: 14px;
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ──────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 26px 52px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(0,0,0,.9) 0%, transparent 100%);
+    }
+    .nav-logo img { height: 20px; display: block; filter: invert(1); }
+    .nav-back {
+      font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gray-d); text-decoration: none; transition: color .3s;
+    }
+    .nav-back:hover { color: var(--white); }
+
+    /* ── Wrap ─────────────────────────────────── */
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 52px; }
+
+    /* ── Header ───────────────────────────────── */
+    .eb-header { padding: 160px 0 72px; text-align: center; }
+    .eb-eyebrow {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 20px;
+    }
+    .eb-eyebrow::before, .eb-eyebrow::after {
+      content: ''; width: 20px; height: 1px; background: var(--orange);
+    }
+    .eb-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(48px, 7vw, 88px);
+      font-weight: 400; color: var(--white);
+      line-height: 1; letter-spacing: -.01em;
+    }
+    .eb-header p {
+      margin-top: 18px; font-size: 14px;
+      color: var(--gray-d); letter-spacing: .04em;
+    }
+
+    /* ── Grid ─────────────────────────────────── */
+    .eb-section { padding: 0 0 120px; }
+    .eb-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    /* ── Card ─────────────────────────────────── */
+    .eb-card {
+      display: flex; flex-direction: column;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.02);
+      overflow: hidden;
+      transition: border-color .35s, transform .35s;
+      cursor: pointer;
+    }
+    .eb-card:hover {
+      border-color: var(--orange);
+      transform: translateY(-4px);
+    }
+
+    /* Cover image */
+    .eb-cover {
+      width: 100%; aspect-ratio: 3 / 4;
+      object-fit: cover; display: block;
+      transition: opacity .35s;
+    }
+    .eb-card:hover .eb-cover { opacity: .92; }
+
+    /* Card body */
+    .eb-body {
+      padding: 20px 20px 24px;
+      display: flex; flex-direction: column;
+      gap: 16px; flex: 1;
+    }
+    .eb-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px; font-weight: 400; color: var(--white);
+      line-height: 1.3;
+    }
+    .eb-price {
+      font-size: 22px; font-weight: 400;
+      font-family: 'Playfair Display', serif;
+      color: var(--orange);
+    }
+    .eb-price.premium { color: var(--mustard); }
+
+    /* Buy button */
+    .eb-btn {
+      display: block; width: 100%;
+      padding: 13px 20px; text-align: center;
+      background: var(--orange); color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
+      font-weight: 500; text-decoration: none; border: none; cursor: pointer;
+      transition: background .3s, color .3s;
+      margin-top: auto;
+    }
+    .eb-btn:hover { background: var(--brown); color: var(--white); }
+    .eb-btn.premium-btn { background: var(--mustard); color: var(--black); }
+    .eb-btn.premium-btn:hover { background: var(--brown); color: var(--white); }
+
+    /* ── Footer ───────────────────────────────── */
+    footer {
+      background: var(--gray-l); padding: 26px 52px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    footer p { font-size: 10px; letter-spacing: .1em; color: rgba(0,0,0,.5); }
+
+    /* ── Responsive ───────────────────────────── */
+    @media (max-width: 960px) {
+      .eb-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      nav, .wrap, footer { padding-left: 28px; padding-right: 28px; }
+    }
+    @media (max-width: 560px) {
+      .eb-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .eb-header { padding: 120px 0 48px; }
+      .eb-body { padding: 14px 14px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Nav ───────────────────────────────────── -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="EB" />
+  </a>
+  <a href="index.html" class="nav-back">← Back</a>
+</nav>
+
+<!-- ── Header ────────────────────────────────── -->
+<header class="eb-header">
+  <div class="wrap">
+    <p class="eb-eyebrow">The Eagle &amp; The Blackbird</p>
+    <h1>E-Book</h1>
+    <p>Digital guides — delivered instantly as PDF</p>
+  </div>
+</header>
+
+<!-- ── Books ─────────────────────────────────── -->
+<section class="eb-section">
+  <div class="wrap">
+    <div class="eb-grid">
+
+      <!-- TUG_BGK — $25 -->
+      <div class="eb-card">
+        <img class="eb-cover" src="TUG_BGK.png" alt="The Ultimate Guide — Bass Guitar, Guitar, Keyboard" />
+        <div class="eb-body">
+          <p class="eb-title">The Ultimate Guide — Bass Guitar, Guitar, Keyboard</p>
+          <p class="eb-price premium">$25</p>
+          <a href="#" class="eb-btn premium-btn" target="_blank">Purchase — $25</a>
+        </div>
+      </div>
+
+      <!-- TUG_B — $10 -->
+      <div class="eb-card">
+        <img class="eb-cover" src="TUG_B.png" alt="The Ultimate Guide — Bass Guitar" />
+        <div class="eb-body">
+          <p class="eb-title">The Ultimate Guide — Bass Guitar</p>
+          <p class="eb-price">$10</p>
+          <a href="#" class="eb-btn" target="_blank">Purchase — $10</a>
+        </div>
+      </div>
+
+      <!-- TUG_G — $10 -->
+      <div class="eb-card">
+        <img class="eb-cover" src="TUG_G.png" alt="The Ultimate Guide — Guitar" />
+        <div class="eb-body">
+          <p class="eb-title">The Ultimate Guide — Guitar</p>
+          <p class="eb-price">$10</p>
+          <a href="#" class="eb-btn" target="_blank">Purchase — $10</a>
+        </div>
+      </div>
+
+      <!-- TUG_K — $10 -->
+      <div class="eb-card">
+        <img class="eb-cover" src="TUG_K.png" alt="The Ultimate Guide — Keyboard" />
+        <div class="eb-body">
+          <p class="eb-title">The Ultimate Guide — Keyboard</p>
+          <p class="eb-price">$10</p>
+          <a href="#" class="eb-btn" target="_blank">Purchase — $10</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────── -->
+<footer>
+  <p>© 2026 The Eagle and The Blackbird</p>
+  <p>Film · Music · Brand &nbsp;|&nbsp; South Florida</p>
+</footer>
+
+</body>
+</html>
