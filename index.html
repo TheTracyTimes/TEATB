@@ -324,6 +324,15 @@
       font-family: 'Playfair Display', serif; font-style: italic;
       font-size: 18px; color: var(--gray-d); margin-bottom: 64px; max-width: 520px;
     }
+    .ebook-block {
+      display: flex; align-items: flex-end; justify-content: space-between; gap: 40px;
+      background: #080604; border: 1px solid rgba(191,87,0,.22);
+      padding: 34px 36px 28px; margin-bottom: 2px;
+      transition: border-color .3s, background .3s;
+    }
+    .ebook-block:hover { border-color: rgba(191,87,0,.45); background: rgba(191,87,0,.04); }
+    .ebook-block-text { flex: 1; min-width: 0; }
+    .ebook-block-cta { flex-shrink: 0; }
     .prod-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
     .prod-card {
       background: #080604; border: 1px solid rgba(255,255,255,.05);
@@ -515,6 +524,7 @@
       .bundle-head { flex: none; width: 100%; padding-right: 0; border-right: none; border-bottom: 1px solid rgba(255,255,255,.15); padding-bottom: 28px; }
       .bundles-cards { padding-left: 0; flex-direction: column; gap: 22px; }
       .bc { border-right: none; padding: 0 0 20px; border-bottom: 1px solid rgba(255,255,255,.1); }
+      .ebook-block { flex-direction: column; align-items: flex-start; gap: 24px; }
       .prod-grid { grid-template-columns: 1fr 1fr; }
       .frow { grid-template-columns: 1fr; }
       footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
@@ -793,6 +803,18 @@
       <h2 class="sh">Shop</h2>
       <p class="products-intro">Tools and resources built from real creative work — for creators, producers, and freelancers ready to level up.</p>
     </div>
+    <div class="ebook-block rv" style="transition-delay:.05s">
+      <div class="ebook-block-text">
+        <span class="prod-tag avail">Available Now</span>
+        <h3 class="prod-name">The Ultimate Guide Series</h3>
+        <p class="prod-desc">Music theory e-books for bass guitar, guitar, and keyboard. Every scale, arpeggio, triad, chord, and mode — laid out clean and built to last a lifetime of practice.</p>
+        <p class="prod-price">$10 – $25</p>
+      </div>
+      <div class="ebook-block-cta">
+        <a href="ebook.html" class="prod-btn active">Shop E-Books</a>
+      </div>
+    </div>
+
     <div class="prod-grid rv" style="transition-delay:.1s">
       <div class="prod-card">
         <span class="prod-tag soon">Coming Soon</span>
