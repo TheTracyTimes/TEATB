@@ -144,17 +144,13 @@
     .price-row { display: flex; align-items: baseline; gap: 14px; margin-bottom: 6px; }
     .info-price { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 400; color: var(--orange); line-height: 1; }
     .info-price-note { font-size: 11px; color: var(--gray-d); }
-    .payment-label { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--gray-d); margin-bottom: 12px; }
-    .payment-btns { display: flex; flex-direction: column; gap: 10px; }
-    .pay-btn { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; text-decoration: none; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; font-weight: 500; transition: background .3s, color .3s; border: 1px solid transparent; }
-    .pay-arrow { font-size: 13px; }
-    .pay-paypal  { background: var(--orange); color: var(--black); }
-    .pay-paypal:hover  { background: var(--brown); color: var(--white); }
-    .pay-cashapp { background: transparent; color: var(--white); border-color: rgba(255,255,255,.2); }
-    .pay-cashapp:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.4); }
-    .pay-venmo   { background: transparent; color: var(--white); border-color: rgba(255,255,255,.2); }
-    .pay-venmo:hover   { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.4); }
-    .pay-note { font-size: 11px; color: rgba(255,255,255,.28); margin-top: 12px; line-height: 1.6; }
+    .action-btns { display: flex; flex-direction: column; gap: 10px; }
+    .act-btn { display: flex; align-items: center; justify-content: center; padding: 14px 20px; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; font-weight: 500; cursor: pointer; border: 1px solid transparent; transition: background .3s, color .3s; font-family: 'DM Sans', sans-serif; }
+    .act-purchase { background: var(--orange); color: var(--black); }
+    .act-purchase:hover { background: var(--brown); color: var(--white); }
+    .act-cart { background: transparent; color: var(--white); border-color: rgba(255,255,255,.2); }
+    .act-cart:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.4); }
+    .act-feedback { font-size: 11px; color: rgba(255,255,255,.4); margin-top: 10px; min-height: 1.4em; letter-spacing: .08em; }
 
     footer { background: var(--gray-l); padding: 26px 52px; display: flex; align-items: center; justify-content: space-between; }
     footer p { font-size: 10px; letter-spacing: .1em; color: rgba(0,0,0,.5); }
@@ -246,13 +242,11 @@
 
         <div class="divider"></div>
 
-        <p class="payment-label">Choose your payment method</p>
-        <div class="payment-btns">
-          <a href="#" class="pay-btn pay-paypal" target="_blank">PayPal <span class="pay-arrow">→</span></a>
-          <a href="#" class="pay-btn pay-cashapp" target="_blank">Cash App <span class="pay-arrow">→</span></a>
-          <a href="#" class="pay-btn pay-venmo" target="_blank">Venmo <span class="pay-arrow">→</span></a>
+        <div class="action-btns">
+          <button class="act-btn act-purchase" id="purchase-btn">Purchase</button>
+          <button class="act-btn act-cart" id="cart-btn">Add to Cart</button>
         </div>
-        <p class="pay-note">After payment, your PDF will be delivered to your email within 24 hours.</p>
+        <p class="act-feedback" id="act-feedback"></p>
       </div>
 
     </div>
@@ -310,6 +304,30 @@
 
   prevBtn.disabled = true;
   nextBtn.disabled = images.length <= 1;
+})();
+
+(function () {
+  const PRODUCT = { id: 'tug-k', title: 'The Ultimate Guide — Keyboard', price: 10 };
+  const feedback = document.getElementById('act-feedback');
+
+  function getCart() { return JSON.parse(localStorage.getItem('eb-cart') || '[]'); }
+  function saveCart(c) { localStorage.setItem('eb-cart', JSON.stringify(c)); }
+  function inCart() { return getCart().some(i => i.id === PRODUCT.id); }
+
+  function addToCart() {
+    if (!inCart()) { const c = getCart(); c.push(PRODUCT); saveCart(c); }
+  }
+
+  document.getElementById('cart-btn').addEventListener('click', function () {
+    addToCart();
+    feedback.textContent = 'Added to cart.';
+    setTimeout(() => { feedback.textContent = ''; }, 3000);
+  });
+
+  document.getElementById('purchase-btn').addEventListener('click', function () {
+    addToCart();
+    window.location.href = 'cart.html';
+  });
 })();
 </script>
 </body>

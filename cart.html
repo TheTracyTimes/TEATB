@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart · E&B</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --white:#FFFFFF; --black:#000000; --gray-d:#A9A9A9; --gray-l:#D3D3D3;
+      --brown:#7B3F00; --khaki:#C3B091; --beige:#F5F5DC;
+      --wine:#722F37; --orange:#BF5700; --mustard:#FFDB58;
+      --olive:#808000; --navy:#000080; --lilac:#C8A2C8;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 26px 52px; display: flex; align-items: center; justify-content: space-between; background: linear-gradient(to bottom, rgba(0,0,0,.9), transparent); }
+    .nav-logo img { height: 20px; display: block; filter: invert(1); }
+    .nav-back { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--gray-d); text-decoration: none; transition: color .3s; }
+    .nav-back:hover { color: var(--white); }
+
+    .wrap { max-width: 780px; margin: 0 auto; padding: 0 52px; width: 100%; }
+
+    main { flex: 1; padding: 120px 0 80px; }
+
+    .cart-eyebrow { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--mustard); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+    .cart-eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--mustard); }
+    h1 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 42px); font-weight: 400; margin-bottom: 48px; }
+
+    .divider { width: 100%; height: 1px; background: rgba(255,255,255,.08); margin: 0; }
+
+    /* Cart items */
+    #cart-items { display: flex; flex-direction: column; }
+    .cart-item {
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+      padding: 22px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .cart-item-title { font-size: 14px; font-weight: 400; color: var(--white); }
+    .cart-item-price { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--mustard); white-space: nowrap; }
+    .cart-item-remove {
+      background: transparent; border: none; color: rgba(255,255,255,.28);
+      font-size: 18px; cursor: pointer; padding: 4px 8px;
+      transition: color .2s; line-height: 1; flex-shrink: 0;
+    }
+    .cart-item-remove:hover { color: var(--white); }
+
+    /* Empty state */
+    .cart-empty { padding: 60px 0; text-align: center; }
+    .cart-empty p { color: rgba(255,255,255,.4); font-size: 14px; margin-bottom: 28px; }
+    .cart-empty a { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--mustard); text-decoration: none; border-bottom: 1px solid rgba(255,191,0,.3); padding-bottom: 2px; transition: border-color .3s; }
+    .cart-empty a:hover { border-color: var(--mustard); }
+
+    /* Summary */
+    #cart-summary { display: none; }
+    .summary-row { display: flex; justify-content: space-between; align-items: baseline; padding: 24px 0 20px; }
+    .summary-label { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--gray-d); }
+    .summary-total { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--white); }
+
+    /* Checkout */
+    .checkout-label { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--gray-d); margin-bottom: 14px; margin-top: 28px; }
+    .checkout-btns { display: flex; flex-direction: column; gap: 10px; }
+    .checkout-btn {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px; text-decoration: none;
+      font-size: 10px; letter-spacing: .22em; text-transform: uppercase; font-weight: 500;
+      transition: background .3s, color .3s; border: 1px solid transparent;
+    }
+    .checkout-arrow { font-size: 13px; }
+    .ch-paypal  { background: var(--mustard); color: var(--black); }
+    .ch-paypal:hover  { background: var(--brown); color: var(--white); }
+    .ch-cashapp { background: transparent; color: var(--white); border-color: rgba(255,255,255,.2); }
+    .ch-cashapp:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.4); }
+    .ch-venmo   { background: transparent; color: var(--white); border-color: rgba(255,255,255,.2); }
+    .ch-venmo:hover   { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.4); }
+    .checkout-note { font-size: 11px; color: rgba(255,255,255,.28); margin-top: 14px; line-height: 1.6; }
+
+    footer { background: var(--gray-l); padding: 26px 52px; display: flex; align-items: center; justify-content: space-between; }
+    footer p { font-size: 10px; letter-spacing: .1em; color: rgba(0,0,0,.5); }
+
+    @media (max-width: 700px) {
+      nav, footer { padding-left: 28px; padding-right: 28px; }
+      .wrap { padding: 0 28px; }
+      .cart-item-title { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="Branding/logo.png" alt="EB" /></a>
+  <a href="ebook.html" class="nav-back">← E-Books</a>
+</nav>
+
+<main>
+  <div class="wrap">
+    <p class="cart-eyebrow">The Eagle &amp; The Blackbird</p>
+    <h1>Your Cart</h1>
+
+    <div class="divider"></div>
+
+    <div id="cart-items"></div>
+
+    <div id="cart-summary">
+      <div class="summary-row">
+        <span class="summary-label">Total</span>
+        <span class="summary-total" id="cart-total">$0</span>
+      </div>
+      <div class="divider"></div>
+      <p class="checkout-label">Choose your payment method</p>
+      <div class="checkout-btns">
+        <a href="#" class="checkout-btn ch-paypal" id="paypal-btn" target="_blank">PayPal <span class="checkout-arrow">→</span></a>
+        <a href="#" class="checkout-btn ch-cashapp" id="cashapp-btn" target="_blank">Cash App <span class="checkout-arrow">→</span></a>
+        <a href="#" class="checkout-btn ch-venmo" id="venmo-btn" target="_blank">Venmo <span class="checkout-arrow">→</span></a>
+      </div>
+      <p class="checkout-note">After payment, send your receipt to our email and your PDF will be delivered within 24 hours.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 The Eagle and The Blackbird</p>
+  <p>Film · Music · Brand &nbsp;|&nbsp; South Florida</p>
+</footer>
+
+<script>
+(function () {
+  const itemsEl   = document.getElementById('cart-items');
+  const summaryEl = document.getElementById('cart-summary');
+  const totalEl   = document.getElementById('cart-total');
+
+  function getCart() { return JSON.parse(localStorage.getItem('eb-cart') || '[]'); }
+  function saveCart(c) { localStorage.setItem('eb-cart', JSON.stringify(c)); }
+
+  function render() {
+    const cart = getCart();
+    itemsEl.innerHTML = '';
+
+    if (cart.length === 0) {
+      summaryEl.style.display = 'none';
+      itemsEl.innerHTML = `
+        <div class="cart-empty">
+          <p>Your cart is empty.</p>
+          <a href="ebook.html">Browse E-Books</a>
+        </div>`;
+      return;
+    }
+
+    cart.forEach(function (item) {
+      const row = document.createElement('div');
+      row.className = 'cart-item';
+      row.innerHTML = `
+        <span class="cart-item-title">${item.title}</span>
+        <span class="cart-item-price">$${item.price}</span>
+        <button class="cart-item-remove" aria-label="Remove" data-id="${item.id}">×</button>`;
+      itemsEl.appendChild(row);
+    });
+
+    itemsEl.querySelectorAll('.cart-item-remove').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const updated = getCart().filter(i => i.id !== btn.dataset.id);
+        saveCart(updated);
+        render();
+      });
+    });
+
+    const total = cart.reduce(function (sum, i) { return sum + i.price; }, 0);
+    totalEl.textContent = '$' + total;
+    summaryEl.style.display = 'block';
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>
